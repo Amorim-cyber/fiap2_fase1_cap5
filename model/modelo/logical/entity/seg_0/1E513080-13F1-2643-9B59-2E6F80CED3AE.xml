@@ -1,0 +1,75 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="1E513080-13F1-2643-9B59-2E6F80CED3AE" name="tb_morador">
+<createdBy>lucca</createdBy>
+<createdTime>2022-02-09 00:36:27 UTC</createdTime>
+<ownerDesignName>modelo</ownerDesignName>
+<engineerTo>
+<item key="8BD968B4-FE0E-FCE3-19F1-2BCFF0C32E1E" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="id_morador" id="418DBA8A-9DC3-EDDE-84D2-B71C76A58C71">
+<createdBy>lucca</createdBy>
+<createdTime>2022-02-09 00:36:57 UTC</createdTime>
+<ownerDesignName>modelo</ownerDesignName>
+<engineerTo>
+<item key="8BD968B4-FE0E-FCE3-19F1-2BCFF0C32E1E" value="true"/>
+</engineerTo>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="nm_morador" id="A08E62EA-67F4-3E65-F6F4-4CF5E7FC9A15">
+<createdBy>lucca</createdBy>
+<createdTime>2022-02-09 00:37:09 UTC</createdTime>
+<ownerDesignName>modelo</ownerDesignName>
+<engineerTo>
+<item key="8BD968B4-FE0E-FCE3-19F1-2BCFF0C32E1E" value="true"/>
+</engineerTo>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="nr_morador" id="022DBCFC-19B2-A7BC-2E2A-2FDC99140A6C">
+<createdBy>lucca</createdBy>
+<createdTime>2022-02-09 00:41:37 UTC</createdTime>
+<ownerDesignName>modelo</ownerDesignName>
+<engineerTo>
+<item key="8BD968B4-FE0E-FCE3-19F1-2BCFF0C32E1E" value="true"/>
+</engineerTo>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="id_condominio" id="1B100B4D-E002-4990-70B1-1E38279AF50C">
+<createdBy>lucca</createdBy>
+<createdTime>2022-02-09 00:46:55 UTC</createdTime>
+<generatorID>2B151D19-526E-EAF7-0194-C936EA3EA338</generatorID>
+<ownerDesignName>modelo</ownerDesignName>
+<engineerTo>
+<item key="8BD968B4-FE0E-FCE3-19F1-2BCFF0C32E1E" value="true"/>
+</engineerTo>
+<referedAttribute>2B48BB35-F96F-8158-76F6-F1FF35410232</referedAttribute>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="760DA0F4-9208-B4D8-EFC6-0DEE03F53566" name="tb_morador PK">
+<createdBy>lucca</createdBy>
+<createdTime>2022-02-09 00:42:59 UTC</createdTime>
+<ownerDesignName>modelo</ownerDesignName>
+<engineerTo>
+<item key="8BD968B4-FE0E-FCE3-19F1-2BCFF0C32E1E" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>418DBA8A-9DC3-EDDE-84D2-B71C76A58C71</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>
