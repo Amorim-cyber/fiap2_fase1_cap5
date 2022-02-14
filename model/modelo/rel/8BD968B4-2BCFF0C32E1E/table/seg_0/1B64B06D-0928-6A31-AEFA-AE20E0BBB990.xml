@@ -1,0 +1,62 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="1B64B06D-0928-6A31-AEFA-AE20E0BBB990" name="tb_prestador">
+<createdBy>lucca</createdBy>
+<createdTime>2022-02-14 19:13:15 UTC</createdTime>
+<generatorID>0ABBEB43-8B95-F3CD-66FF-396CD261EC47</generatorID>
+<ownerDesignName>modelo</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id_prestador" id="FA18A8DE-3286-5750-F93B-32C2F96977A6">
+<createdBy>lucca</createdBy>
+<createdTime>2022-02-14 19:13:15 UTC</createdTime>
+<generatorID>10C543CF-F83C-BF21-14E8-5B7F7FEE16B7</generatorID>
+<ownerDesignName>modelo</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>10</dataTypePrecision>
+<ownDataTypeParameters>,10,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="nm_prestador" id="CC504D61-97C0-D996-4637-6F3F55F25EC3">
+<createdBy>lucca</createdBy>
+<createdTime>2022-02-14 19:13:15 UTC</createdTime>
+<generatorID>9D2DFA7F-0F82-58A1-25D8-F981B9D24FB5</generatorID>
+<ownerDesignName>modelo</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100</dataTypeSize>
+<ownDataTypeParameters>100,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="telefone" id="9F1813F9-56D9-72CA-E24E-14C8EBCAB185">
+<createdBy>lucca</createdBy>
+<createdTime>2022-02-14 19:13:15 UTC</createdTime>
+<generatorID>E3FC5A4D-EC81-1234-B7D5-4F7187C16ADB</generatorID>
+<ownerDesignName>modelo</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>19</dataTypePrecision>
+<ownDataTypeParameters>,19,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="425CF05F-DF02-7C87-BC7F-507ABEB855E3" name="tb_prestador_PK">
+<createdBy>lucca</createdBy>
+<createdTime>2022-02-14 19:13:15 UTC</createdTime>
+<generatorID>82B860BD-57ED-5F5E-42DD-5C036FF2C594</generatorID>
+<ownerDesignName>modelo</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="FA18A8DE-3286-5750-F93B-32C2F96977A6"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

@@ -1,0 +1,141 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="D5BFCB59-77B9-C8F4-36DA-33450F63AD4D" name="tb_registro_servico">
+<createdBy>lucca</createdBy>
+<createdTime>2022-02-14 19:13:15 UTC</createdTime>
+<generatorID>F1E64973-122F-0218-5870-030F0153A6A3</generatorID>
+<ownerDesignName>modelo</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id_registro" id="BBCB61AB-2BA6-7E4F-AE20-DD6FF0DA0589">
+<createdBy>lucca</createdBy>
+<createdTime>2022-02-14 19:13:15 UTC</createdTime>
+<generatorID>850B6788-EEC7-15EE-A197-4EBA409F5DB0</generatorID>
+<ownerDesignName>modelo</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>10</dataTypePrecision>
+<ownDataTypeParameters>,10,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="dt_inicio" id="F48386AE-954A-F467-8C2D-8E10814BE997">
+<createdBy>lucca</createdBy>
+<createdTime>2022-02-14 19:13:15 UTC</createdTime>
+<generatorID>CF16D518-49EC-25A2-D69A-3A0F434473BB</generatorID>
+<ownerDesignName>modelo</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT047</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="dt_termino" id="9B813CE6-C3A3-3F19-E4A3-EC6E7E72178D">
+<createdBy>lucca</createdBy>
+<createdTime>2022-02-14 19:13:15 UTC</createdTime>
+<generatorID>EB605AE3-D9DF-5EC1-DAB3-00E656458538</generatorID>
+<ownerDesignName>modelo</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT047</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="tb_prestador_id_prestador" id="4D79F8FD-2DD4-0987-789D-C8D5F8CE7A8C">
+<createdBy>lucca</createdBy>
+<createdTime>2022-02-14 19:13:15 UTC</createdTime>
+<generatorID>213B8417-9CC5-55EF-32B9-0E1FB3E07324</generatorID>
+<ownerDesignName>modelo</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>10</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="D733E843-5755-8464-9FD8-A0F07E1DAC83" referredColumn="FA18A8DE-3286-5750-F93B-32C2F96977A6"/>
+</associations>
+</Column>
+<Column name="tb_morador_id_morador" id="6D4CE90A-76DF-B7F8-F36F-AE2D5DB90B49">
+<createdBy>lucca</createdBy>
+<createdTime>2022-02-14 19:13:15 UTC</createdTime>
+<generatorID>CDF29748-BE1E-0A5D-DC62-08A437225AEB</generatorID>
+<ownerDesignName>modelo</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>10</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="29E4F4B7-C027-7C9A-22CE-01B814771048" referredColumn="D47DD5AC-80DC-8BA3-D496-471330B139F2"/>
+</associations>
+</Column>
+<Column name="tb_servico_id_servico" id="8648677F-0CDC-3CF6-1729-F6A647201366">
+<createdBy>lucca</createdBy>
+<createdTime>2022-02-14 19:13:15 UTC</createdTime>
+<generatorID>E7782871-4F52-85A9-1A72-B9C4DEF3C7C7</generatorID>
+<ownerDesignName>modelo</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>10</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="DFD93025-EFAE-19F2-4093-549E316FE802" referredColumn="609FA590-3DBE-68C5-E80D-0AA7015195EF"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="BDCB3EBC-9C46-B142-7178-1BA6DE4588DC" name="tb_registro_servico_PK">
+<createdBy>lucca</createdBy>
+<createdTime>2022-02-14 19:13:15 UTC</createdTime>
+<generatorID>07E08FA8-22B1-59AF-8436-265D5C1EFFF2</generatorID>
+<ownerDesignName>modelo</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="BBCB61AB-2BA6-7E4F-AE20-DD6FF0DA0589"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="3B85EE43-319E-3A84-C172-72D3B0459FF2" name="tb_registro_servico_tb_prestador_FK">
+<createdBy>lucca</createdBy>
+<createdTime>2022-02-14 19:13:15 UTC</createdTime>
+<generatorID>21846791-515C-1CD9-4433-B8945295685E</generatorID>
+<ownerDesignName>modelo</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="4D79F8FD-2DD4-0987-789D-C8D5F8CE7A8C"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="638E928D-3076-9FBB-BBCA-B47EE2AF5AD1" name="tb_registro_servico_tb_morador_FK">
+<createdBy>lucca</createdBy>
+<createdTime>2022-02-14 19:13:15 UTC</createdTime>
+<generatorID>B42B5209-2726-72F8-F130-E84628FD6971</generatorID>
+<ownerDesignName>modelo</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="6D4CE90A-76DF-B7F8-F36F-AE2D5DB90B49"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="C9988289-0F48-94FB-062F-EF7CA41B3376" name="tb_registro_servico_tb_servico_FK">
+<createdBy>lucca</createdBy>
+<createdTime>2022-02-14 19:13:15 UTC</createdTime>
+<generatorID>CDC3398B-DDBB-4428-3653-982526A5B660</generatorID>
+<ownerDesignName>modelo</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="8648677F-0CDC-3CF6-1729-F6A647201366"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>
