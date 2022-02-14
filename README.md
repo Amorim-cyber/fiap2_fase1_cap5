@@ -22,3 +22,31 @@ Conforme solicitado, este projeto tem como objetivo montar o script de criação
 <HR> 
 
 <h3>Montar o script</h3>
+
+...
+
+<h3>Montar relação entre entidades</h3>
+
+Vamos agora formalizar as relações em nosso programa.
+
+* <b>Relação N x N:</b> 
+
+  As entidades `Morador` e `Condomínio` possuem relação N x N, adicionamos as seguintes linhas de código nos seguintes arquivos:
+
+  <b>Morador.java</b>
+
+  ````java
+  @ManyToMany
+  	@JoinTable(joinColumns = @JoinColumn(name="id_morador"), 
+  	inverseJoinColumns = @JoinColumn(name="id_condominio"), name = "tb_registro_condominio")
+  	private List<Condominio> condominios;
+  ````
+
+   <b>Condominio.java</b>
+
+  ````java
+  @ManyToMany(mappedBy="condominios")
+  	private List<Morador> moradores;
+  ````
+
+  
