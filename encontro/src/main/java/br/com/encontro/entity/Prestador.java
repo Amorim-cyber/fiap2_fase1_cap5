@@ -1,10 +1,13 @@
 package br.com.encontro.entity;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -21,8 +24,11 @@ public class Prestador {
 	@Column(name="nm_prestador",nullable=false,length=100)
 	private String nome;
 	
-	@Column(name="nr_morador",nullable=false)
+	@Column(name="nr_prestador",nullable=false)
 	private Long telefone;
+	
+	@OneToMany(mappedBy = "prestador")
+	private List<Registro> registros;
 	
 	public Prestador() {
 	}
