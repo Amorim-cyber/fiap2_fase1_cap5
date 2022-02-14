@@ -1,10 +1,13 @@
 package br.com.encontro.entity;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -25,6 +28,9 @@ public class Condominio {
 	
 	@Column(name="endereco",nullable=false,length=200)
 	private String endereco;
+	
+	@ManyToMany(mappedBy="condominios")
+	private List<Morador> moradores;
 
 	public Condominio() {
 	}
