@@ -40,10 +40,13 @@ public class Morador {
 	
 	public Morador() {
 	}
-
-	public Morador(String nome, Long telefone) {
+	
+	public Morador(int id, String nome, Long numero, List<Condominio> condominios, List<Registro> registros) {
+		this.id = id;
 		this.nome = nome;
-		this.numero = telefone;
+		this.numero = numero;
+		this.condominios = condominios;
+		this.registros = registros;
 	}
 
 	public int getId() {
@@ -69,5 +72,23 @@ public class Morador {
 	public void setNumero(Long numero) {
 		this.numero = numero;
 	}
+
+	public List<Condominio> getCondominios() {
+		return condominios;
+	}
+
+	public void setCondominios(List<Condominio> condominios) {
+		this.condominios = condominios;
+	}
+
+	public List<Registro> getRegistros() {
+		return registros;
+	}
+
+	public void setRegistros(List<Registro> registros) {
+		this.registros = registros;
+	}
+	
+	
 	
 }
