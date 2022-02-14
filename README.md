@@ -69,3 +69,36 @@ Vamos agora formalizar as relações em nosso programa.
 
 * <b>Relação Um para Muitos:</b>
 
+  As entidades  `Serviço`, `Morador` e `Prestador` possuem uma relação de um para muitos em relação a `Registro Serviço`. Adicionamos as seguintes linhas de código nos seguintes arquivos:
+
+  <b>Morador.java</b>
+
+  ````java
+  @OneToMany(mappedBy = "morador")
+  	private List<Registro> registros;
+  ````
+
+  <b>Prestador.java</b>
+
+  ````java
+  @OneToMany(mappedBy = "prestador")
+  	private List<Registro> registros;
+  ````
+
+  <b>Servico.java</b>
+
+  ````java
+  @OneToMany(mappedBy = "tipoServico")
+  	private List<Registro> registros;
+  ````
+
+Pronto! Relações formalizadas!
+
+<hr>
+
+
+
+
+
+
+
