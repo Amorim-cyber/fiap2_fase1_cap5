@@ -29,9 +29,9 @@ Conforme solicitado, este projeto tem como objetivo montar o script de criação
 
 Vamos agora formalizar as relações em nosso programa.
 
-* <b>Relação N x N:</b> 
+* <b>Relação Muitos para Muitos:</b> 
 
-  As entidades `Morador` e `Condomínio` possuem relação N x N, adicionamos as seguintes linhas de código nos seguintes arquivos:
+  As entidades `Morador` e `Condomínio` possuem relação N x N. Adicionamos as seguintes linhas de código nos seguintes arquivos:
 
   <b>Morador.java</b>
 
@@ -49,4 +49,23 @@ Vamos agora formalizar as relações em nosso programa.
   	private List<Morador> moradores;
   ````
 
-  
+* <b>Relação Muitos para Um:</b>
+
+  A entidade `Registro Serviço` possui uma relação de muitos para um com as entidades `Serviço`, `Morador` e `Prestador`. Adicionamos as seguintes linhas de código no arquivo  <b>Registro.java</b>:
+
+  ````java
+  @JoinColumn(name = "id_servico")
+  	@ManyToOne
+  	private Servico tipoServico;
+  	
+  	@JoinColumn(name = "id_morador")
+  	@ManyToOne
+  	private Morador morador;
+  	
+  	@JoinColumn(name = "id_prestador")
+  	@ManyToOne
+  	private Morador prestador;
+  ````
+
+* <b>Relação Um para Muitos:</b>
+
