@@ -32,11 +32,15 @@ public class Prestador {
 	
 	public Prestador() {
 	}
-
-	public Prestador(String nome, Long telefone) {
+	
+	public Prestador(int id, String nome, Long telefone, List<Registro> registros) {
+		this.id = id;
 		this.nome = nome;
 		this.telefone = telefone;
+		this.registros = registros;
 	}
+
+
 
 	public int getId() {
 		return id;
@@ -61,8 +65,14 @@ public class Prestador {
 	public void setTelefone(Long telefone) {
 		this.telefone = telefone;
 	}
-	
-	
+
+	public List<Registro> getRegistros() {
+		return registros;
+	}
+
+	public void setRegistros(List<Registro> registros) {
+		this.registros = registros;
+	}
 	
 
 }
