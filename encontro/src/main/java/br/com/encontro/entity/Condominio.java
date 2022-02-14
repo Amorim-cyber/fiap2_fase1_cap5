@@ -35,10 +35,14 @@ public class Condominio {
 	public Condominio() {
 	}
 
-	public Condominio(String nome, String endereco) {
+	public Condominio(int id, String nome, String endereco, List<Morador> moradores) {
+		this.id = id;
 		this.nome = nome;
 		this.endereco = endereco;
+		this.moradores = moradores;
 	}
+
+
 
 	public int getId() {
 		return id;
@@ -63,5 +67,15 @@ public class Condominio {
 	public void setEndereco(String endereco) {
 		this.endereco = endereco;
 	}
+
+	public List<Morador> getMoradores() {
+		return moradores;
+	}
+
+	public void setMoradores(List<Morador> moradores) {
+		this.moradores = moradores;
+	}
+	
+	
 	
 }
