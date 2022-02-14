@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -33,6 +34,9 @@ public class Morador {
 	@JoinTable(joinColumns = @JoinColumn(name="id_morador"), 
 	inverseJoinColumns = @JoinColumn(name="id_condominio"), name = "tb_registro_condominio")
 	private List<Condominio> condominios;
+	
+	@OneToMany(mappedBy = "morador")
+	private List<Registro> registros;
 	
 	public Morador() {
 	}
