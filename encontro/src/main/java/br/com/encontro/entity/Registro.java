@@ -26,12 +26,12 @@ public class Registro {
 	private int id;
 
 	@CreationTimestamp
-	@Column(name="dt_data_cadastro")
-	private Calendar dataCadastro;
+	@Column(name="dt_data_inicio")
+	private Calendar dataInicio;
 	
 	@UpdateTimestamp
-	@Column(name="dt_data_modificacao")
-	private Calendar dataModificacao;
+	@Column(name="dt_data_fim")
+	private Calendar dataFim;
 	
 	@JoinColumn(name = "id_servico")
 	@ManyToOne
@@ -44,22 +44,73 @@ public class Registro {
 	@JoinColumn(name = "id_prestador")
 	@ManyToOne
 	private Prestador prestador;
+	
 
-	public Calendar getDataCadastro() {
-		return dataCadastro;
+	public Registro() {
 	}
 
-	public void setDataCadastro(Calendar dataCadastro) {
-		this.dataCadastro = dataCadastro;
+	public Registro(int id, Calendar dataInicio, Calendar dataFim, Servico tipoServico, Morador morador,
+			Prestador prestador) {
+		this.id = id;
+		this.dataInicio = dataInicio;
+		this.dataFim = dataFim;
+		this.tipoServico = tipoServico;
+		this.morador = morador;
+		this.prestador = prestador;
 	}
 
-	public Calendar getDataModificacao() {
-		return dataModificacao;
+	public Calendar getDataInicio() {
+		return dataInicio;
 	}
 
-	public void setDataModificacao(Calendar dataModificacao) {
-		this.dataModificacao = dataModificacao;
+	public void setDataInicio(Calendar dataInicio) {
+		this.dataInicio = dataInicio;
 	}
+
+	public Calendar getDataFim() {
+		return dataFim;
+	}
+
+	public void setDataModificacao(Calendar dataFim) {
+		this.dataFim = dataFim;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public Servico getTipoServico() {
+		return tipoServico;
+	}
+
+	public void setTipoServico(Servico tipoServico) {
+		this.tipoServico = tipoServico;
+	}
+
+	public Morador getMorador() {
+		return morador;
+	}
+
+	public void setMorador(Morador morador) {
+		this.morador = morador;
+	}
+
+	public Prestador getPrestador() {
+		return prestador;
+	}
+
+	public void setPrestador(Prestador prestador) {
+		this.prestador = prestador;
+	}
+
+	public void setDataFim(Calendar dataFim) {
+		this.dataFim = dataFim;
+	}
+	
 	
 	
 	
