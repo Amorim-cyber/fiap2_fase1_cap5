@@ -1,10 +1,15 @@
 package br.com.encontro.entity;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -23,6 +28,11 @@ public class Morador {
 	
 	@Column(name="nr_morador",nullable=false)
 	private Long numero;
+	
+	@ManyToMany
+	@JoinTable(joinColumns = @JoinColumn(name="id_morador"), 
+	inverseJoinColumns = @JoinColumn(name="id_condominio"), name = "tb_registro_condominio")
+	private List<Condominio> condominios;
 	
 	public Morador() {
 	}
