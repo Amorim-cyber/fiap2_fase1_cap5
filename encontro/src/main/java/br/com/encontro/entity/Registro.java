@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -30,6 +32,18 @@ public class Registro {
 	@UpdateTimestamp
 	@Column(name="dt_data_modificacao")
 	private Calendar dataModificacao;
+	
+	@JoinColumn(name = "id_servico")
+	@ManyToOne
+	private Servico tipoServico;
+	
+	@JoinColumn(name = "id_morador")
+	@ManyToOne
+	private Morador morador;
+	
+	@JoinColumn(name = "id_prestador")
+	@ManyToOne
+	private Morador prestador;
 
 	public Calendar getDataCadastro() {
 		return dataCadastro;
