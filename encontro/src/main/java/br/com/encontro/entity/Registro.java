@@ -43,7 +43,7 @@ public class Registro {
 	
 	@JoinColumn(name = "id_prestador")
 	@ManyToOne
-	private Morador prestador;
+	private Prestador prestador;
 
 	public Calendar getDataCadastro() {
 		return dataCadastro;
