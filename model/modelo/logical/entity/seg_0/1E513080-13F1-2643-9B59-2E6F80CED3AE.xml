@@ -45,18 +45,6 @@
 <use>0</use>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 </Attribute>
-<Attribute name="id_condominio" id="1B100B4D-E002-4990-70B1-1E38279AF50C">
-<createdBy>lucca</createdBy>
-<createdTime>2022-02-09 00:46:55 UTC</createdTime>
-<generatorID>2B151D19-526E-EAF7-0194-C936EA3EA338</generatorID>
-<ownerDesignName>modelo</ownerDesignName>
-<engineerTo>
-<item key="8BD968B4-FE0E-FCE3-19F1-2BCFF0C32E1E" value="true"/>
-</engineerTo>
-<referedAttribute>2B48BB35-F96F-8158-76F6-F1FF35410232</referedAttribute>
-<use>0</use>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
-</Attribute>
 </attributes>
 <identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
 <identifier id="760DA0F4-9208-B4D8-EFC6-0DEE03F53566" name="tb_morador PK">

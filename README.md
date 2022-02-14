@@ -8,7 +8,8 @@ No <a href="https://github.com/Amorim-cyber/fiap2_fase1_cap4">projeto do capítu
 
 * <b>tb_condominio:</b> Tabela que vai armazenar dados de condomínio. Contém o nome e endereço do condomínio.
 * <b>tb_morador:</b> Tabela que vai armazenar dados de morador. Contém nome e número da sua morada. 
-* <b style="color:grey">Relação condominio_morador:</b> Um condomínio pode ser habitado por um ou mais moradores contudo um morador deve habitar um condomínio (vamos supor por enquanto que um morador tem o direito de ter um imóvel em apenas um condomínio).
+* <b style="color:grey">Relação condominio_morador:</b> Um condomínio pode ser habitado por um ou mais moradores contudo um morador deve pelo menos um condomínio.
+* <b>tb_condominio:</b> Um condomínio pode conter n moradores, assim como um morador pode ter posses em n condomínios. Tabela auxiliar `tb_condominio` serve para normalizar essa relação.
 * <b>tb_servico:</b> Tabela que vai armazenar dados do serviço. Contém o nome do serviço.
 * <b>tb_prestador:</b> Tabela que vai armazenar dados do prestador de serviço. Contém o nome, número de telefone do prestador.
 * <b>tb_registro_servico:</b> Tabela que vai armazenar dados do registro de serviço. Contém a data de inicio e a data de fim de serviço.
