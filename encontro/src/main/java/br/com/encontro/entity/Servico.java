@@ -33,8 +33,11 @@ public class Servico {
 	public Servico() {
 	}
 
-	public Servico(Ocupacao nome) {
+	public Servico(int id, Ocupacao nome, List<Registro> registros) {
+		super();
+		this.id = id;
 		this.nome = nome;
+		this.registros = registros;
 	}
 
 	public int getId() {
@@ -51,6 +54,14 @@ public class Servico {
 
 	public void setNome(Ocupacao nome) {
 		this.nome = nome;
+	}
+
+	public List<Registro> getRegistros() {
+		return registros;
+	}
+
+	public void setRegistros(List<Registro> registros) {
+		this.registros = registros;
 	}
 	
 	
