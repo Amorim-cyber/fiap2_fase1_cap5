@@ -2,6 +2,7 @@ package br.com.encontro.entity;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -27,13 +28,12 @@ public class Morador {
 	@Column(name="nm_morador",nullable=false,length=100)
 	private String nome;
 	
-	@Column(name="nr_morador",nullable=false)
-	private Long numero;
 	
-	@ManyToMany
+	
+	@ManyToMany(cascade=CascadeType.PERSIST)
 	@JoinTable(joinColumns = @JoinColumn(name="id_morador"), 
-	inverseJoinColumns = @JoinColumn(name="id_condominio"), name = "tb_registro_condominio")
-	private List<Condominio> condominios;
+	inverseJoinColumns = @JoinColumn(name="id_morada"), name = "tb_registro_morada")
+	private List<Morada> moradas;
 	
 	@OneToMany(mappedBy = "morador")
 	private List<Registro> registros;
@@ -41,11 +41,10 @@ public class Morador {
 	public Morador() {
 	}
 	
-	public Morador(int id, String nome, Long numero, List<Condominio> condominios, List<Registro> registros) {
+	public Morador(int id, String nome, List<Morada> moradas, List<Registro> registros) {
 		this.id = id;
 		this.nome = nome;
-		this.numero = numero;
-		this.condominios = condominios;
+		this.moradas = moradas;
 		this.registros = registros;
 	}
 
@@ -65,20 +64,12 @@ public class Morador {
 		this.nome = nome;
 	}
 
-	public Long getNumero() {
-		return numero;
+	public List<Morada> getMoradas() {
+		return moradas;
 	}
 
-	public void setNumero(Long numero) {
-		this.numero = numero;
-	}
-
-	public List<Condominio> getCondominios() {
-		return condominios;
-	}
-
-	public void setCondominios(List<Condominio> condominios) {
-		this.condominios = condominios;
+	public void setMoradas(List<Morada> moradas) {
+		this.moradas = moradas;
 	}
 
 	public List<Registro> getRegistros() {
