@@ -2,6 +2,7 @@ package br.com.encontro.entity;
 
 import java.util.Calendar;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -41,29 +42,28 @@ public class Registro {
 	private Calendar dataFim;
 	
 	@JoinColumn(name = "id_servico")
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.PERSIST)
 	private Servico tipoServico;
 	
 	@JoinColumn(name = "id_morador")
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.PERSIST)
 	private Morador morador;
 	
 	@JoinColumn(name = "id_prestador")
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.PERSIST)
 	private Prestador prestador;
 	
 
 	public Registro() {
 	}
 
-	public Registro(int id, Calendar dataInicio, Calendar dataFim, Servico tipoServico, Morador morador,
-			Prestador prestador) {
+	public Registro(int id, Servico tipoServico, Morador morador,
+			Prestador prestador,Estado tipo) {
 		this.id = id;
-		this.dataInicio = dataInicio;
-		this.dataFim = dataFim;
 		this.tipoServico = tipoServico;
 		this.morador = morador;
 		this.prestador = prestador;
+		this.tipo = tipo;
 	}
 
 	public Calendar getDataInicio() {
@@ -116,6 +116,14 @@ public class Registro {
 
 	public void setDataFim(Calendar dataFim) {
 		this.dataFim = dataFim;
+	}
+
+	public Estado getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(Estado tipo) {
+		this.tipo = tipo;
 	}
 	
 	
