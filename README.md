@@ -12,7 +12,7 @@ No <a href="https://github.com/Amorim-cyber/fiap2_fase1_cap4">projeto do capítu
 * <b>tb_condominio:</b> Um condomínio pode conter n moradores, assim como um morador pode ter posses em n condomínios. Tabela auxiliar `tb_condominio` serve para normalizar essa relação.
 * <b>tb_servico:</b> Tabela que vai armazenar dados do serviço. Contém o nome do serviço.
 * <b>tb_prestador:</b> Tabela que vai armazenar dados do prestador de serviço. Contém o nome, número de telefone do prestador.
-* <b>tb_registro_servico:</b> Tabela que vai armazenar dados do registro de serviço. Contém a data de inicio e a data de fim de serviço.
+* <b>tb_registro_servico:</b> Tabela que vai armazenar dados do registro de serviço. Contém a data de inicio, a data de fim de serviço e o status do registro.
 * <b style="color:grey">Relação servico_registro:</b> Um tipo de serviço pode ser registrado, contudo um registro deve conter um tipo de serviço.
 * <b style="color:grey">Relação prestador_registro:</b> Um prestador de serviço pode ser registrado, contudo um registro deve conter um prestador de serviço.
 * <b style="color:grey">Relação morador_registro:</b> Um morador pode ser registrado, contudo um registro deve conter um morador.
@@ -85,6 +85,7 @@ CREATE TABLE tb_registro_servico (
     id_registro                NUMBER(10) NOT NULL,
     dt_inicio                  TIMESTAMP WITH LOCAL TIME ZONE NOT NULL,
     dt_termino                 TIMESTAMP WITH LOCAL TIME ZONE NOT NULL,
+    status                     VARCHAR2(15) NOT NULL,
     tb_prestador_id_prestador  NUMBER(10) NOT NULL,
     tb_morador_id_morador      NUMBER(10) NOT NULL,
     tb_servico_id_servico      NUMBER(10) NOT NULL
