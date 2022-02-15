@@ -4,6 +4,8 @@ import java.util.Calendar;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,6 +27,11 @@ public class Registro {
 	@Column(name="id_registro")
 	private int id;
 
+	@Enumerated(EnumType.STRING)
+	@Column(name="status")
+	private Estado tipo;
+	
+	
 	@CreationTimestamp
 	@Column(name="dt_data_inicio")
 	private Calendar dataInicio;
