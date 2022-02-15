@@ -1,5 +1,5 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
-<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="A044901C-85EB-6182-5AE9-A5D556510DFC" name="tb_registro_condominio">
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="A044901C-85EB-6182-5AE9-A5D556510DFC" name="tb_registro_morada">
 <createdBy>lucca</createdBy>
 <createdTime>2022-02-14 12:40:38 UTC</createdTime>
 <ownerDesignName>modelo</ownerDesignName>
@@ -15,21 +15,6 @@
 <minVolumes>0</minVolumes>
 <normalForm>Third</normalForm>
 <attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
-<Attribute name="id_condominio" id="E81A6BC5-2D0B-D91E-DCF8-6AF2DCB1279D">
-<createdBy>lucca</createdBy>
-<createdTime>2022-02-14 12:42:24 UTC</createdTime>
-<generatorID>F522A78E-DF74-3BB4-C7A5-6B221D48C2FF</generatorID>
-<ownerDesignName>modelo</ownerDesignName>
-<engineerTo>
-<item key="8BD968B4-FE0E-FCE3-19F1-2BCFF0C32E1E" value="true"/>
-</engineerTo>
-<referedAttribute>2B48BB35-F96F-8158-76F6-F1FF35410232</referedAttribute>
-<useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
-<logicalDatatype>LOGDT019</logicalDatatype>
-<dataTypePrecision>10</dataTypePrecision>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
-</Attribute>
 <Attribute name="id_morador" id="D4F9738A-5DBD-0ED1-AAC9-F8FC5B617784">
 <createdBy>lucca</createdBy>
 <createdTime>2022-02-14 12:42:45 UTC</createdTime>
@@ -39,6 +24,22 @@
 <item key="8BD968B4-FE0E-FCE3-19F1-2BCFF0C32E1E" value="true"/>
 </engineerTo>
 <referedAttribute>418DBA8A-9DC3-EDDE-84D2-B71C76A58C71</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>10</dataTypePrecision>
+<ownDataTypeParameters>,10,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="id_morada" id="D4589E02-F160-54D5-80B2-CDFBA80FCD34">
+<createdBy>lucca</createdBy>
+<createdTime>2022-02-15 15:10:37 UTC</createdTime>
+<generatorID>B862F4D5-F23F-AC01-A1C5-65E01143E147</generatorID>
+<ownerDesignName>modelo</ownerDesignName>
+<engineerTo>
+<item key="8BD968B4-FE0E-FCE3-19F1-2BCFF0C32E1E" value="true"/>
+</engineerTo>
+<referedAttribute>4C3E5B98-03AC-E2C8-AFEE-6025F7F47F72</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT019</logicalDatatype>
 <dataTypePrecision>10</dataTypePrecision>

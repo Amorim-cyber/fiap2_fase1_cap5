@@ -1,0 +1,17 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="548A0218-6E20-B918-0BDC-85492D8DE0AB" containerWithKeyObject="F2D17965-B507-09A4-02B5-D35962539BEE" localFKIndex="03178AD5-62CF-41CD-0CD2-9CB982BD84F3" name="tb_registro_morada_tb_morada_FK">
+<createdBy>lucca</createdBy>
+<createdTime>2022-02-15 16:24:40 UTC</createdTime>
+<generatorID>B862F4D5-F23F-AC01-A1C5-65E01143E147</generatorID>
+<ownerDesignName>modelo</ownerDesignName>
+<referredTableLongName>tb_morada</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>5B1BE71D-2276-A016-020F-662335F61ABF</referredTableID>
+<keyObject>A5D46965-0C68-269B-2AA6-1DF86D94F952</keyObject>
+<referredKeyID>A5D46965-0C68-269B-2AA6-1DF86D94F952</referredKeyID>
+<mandatory>true</mandatory>
+<refColNames>id_morada</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

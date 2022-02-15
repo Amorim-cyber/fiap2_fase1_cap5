@@ -1,7 +1,7 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
-<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="A0E6A946-3038-8406-76F9-7CD0040318AE" name="tb_condominio">
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="7586443C-86B3-EE02-9757-46A25A8802A0" name="tb_morada">
 <createdBy>lucca</createdBy>
-<createdTime>2022-02-09 00:43:37 UTC</createdTime>
+<createdTime>2022-02-15 14:58:31 UTC</createdTime>
 <ownerDesignName>modelo</ownerDesignName>
 <engineerTo>
 <item key="8BD968B4-FE0E-FCE3-19F1-2BCFF0C32E1E" value="true"/>
@@ -15,9 +15,9 @@
 <minVolumes>0</minVolumes>
 <normalForm>Third</normalForm>
 <attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
-<Attribute name="id_condominio" id="2B48BB35-F96F-8158-76F6-F1FF35410232">
+<Attribute name="id_morada" id="4C3E5B98-03AC-E2C8-AFEE-6025F7F47F72">
 <createdBy>lucca</createdBy>
-<createdTime>2022-02-09 00:43:51 UTC</createdTime>
+<createdTime>2022-02-15 14:58:47 UTC</createdTime>
 <ownerDesignName>modelo</ownerDesignName>
 <engineerTo>
 <item key="8BD968B4-FE0E-FCE3-19F1-2BCFF0C32E1E" value="true"/>
@@ -28,22 +28,22 @@
 <dataTypePrecision>10</dataTypePrecision>
 <ownDataTypeParameters>,10,</ownDataTypeParameters>
 </Attribute>
-<Attribute name="nm_condominio" id="354B9EBC-DBEB-8726-CF21-E29629AEC223">
+<Attribute name="nr_morada" id="072C7EE6-4CE0-9DFE-73F8-4304AFC7E5B7">
 <createdBy>lucca</createdBy>
-<createdTime>2022-02-09 00:45:16 UTC</createdTime>
+<createdTime>2022-02-15 14:59:17 UTC</createdTime>
 <ownerDesignName>modelo</ownerDesignName>
 <engineerTo>
 <item key="8BD968B4-FE0E-FCE3-19F1-2BCFF0C32E1E" value="true"/>
 </engineerTo>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
-<logicalDatatype>LOGDT024</logicalDatatype>
-<dataTypeSize>100</dataTypeSize>
-<ownDataTypeParameters>100,,</ownDataTypeParameters>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>10</dataTypePrecision>
+<ownDataTypeParameters>,10,</ownDataTypeParameters>
 </Attribute>
-<Attribute name="endereco" id="2B176F8A-E7A9-AD1F-FB03-D60DD5A78ACD">
+<Attribute name="tipo_morada" id="A4DAA5DA-4D40-8FD2-C5B3-2A7DB15C1563">
 <createdBy>lucca</createdBy>
-<createdTime>2022-02-09 00:46:18 UTC</createdTime>
+<createdTime>2022-02-15 15:01:29 UTC</createdTime>
 <ownerDesignName>modelo</ownerDesignName>
 <engineerTo>
 <item key="8BD968B4-FE0E-FCE3-19F1-2BCFF0C32E1E" value="true"/>
@@ -51,14 +51,29 @@
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT024</logicalDatatype>
-<dataTypeSize>200</dataTypeSize>
-<ownDataTypeParameters>200,,</ownDataTypeParameters>
+<dataTypeSize>20</dataTypeSize>
+<ownDataTypeParameters>20,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="id_condominio" id="76FBB49B-FE18-8F8A-66AC-90A7FC7CE2C9">
+<createdBy>lucca</createdBy>
+<createdTime>2022-02-15 15:11:30 UTC</createdTime>
+<generatorID>C4A43E53-5B31-B98E-9058-328799831A16</generatorID>
+<ownerDesignName>modelo</ownerDesignName>
+<engineerTo>
+<item key="8BD968B4-FE0E-FCE3-19F1-2BCFF0C32E1E" value="true"/>
+</engineerTo>
+<referedAttribute>2B48BB35-F96F-8158-76F6-F1FF35410232</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>10</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
 </Attribute>
 </attributes>
 <identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
-<identifier id="961983D4-8D52-5AB5-F344-5DEAF6C5CAF7" name="tb_condominio PK">
+<identifier id="935118C5-C455-46CF-7D5A-045F1AB9377F" name="tb_morada PK">
 <createdBy>lucca</createdBy>
-<createdTime>2022-02-09 00:45:14 UTC</createdTime>
+<createdTime>2022-02-15 14:58:49 UTC</createdTime>
 <ownerDesignName>modelo</ownerDesignName>
 <shouldEngineer>false</shouldEngineer>
 <engineerTo>
@@ -66,7 +81,7 @@
 </engineerTo>
 <pk>true</pk>
 <usedAttributes>
-<attributeRef>2B48BB35-F96F-8158-76F6-F1FF35410232</attributeRef>
+<attributeRef>4C3E5B98-03AC-E2C8-AFEE-6025F7F47F72</attributeRef>
 </usedAttributes>
 </identifier>
 </identifiers>

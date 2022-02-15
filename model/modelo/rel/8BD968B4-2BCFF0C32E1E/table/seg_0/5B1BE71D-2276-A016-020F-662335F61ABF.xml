@@ -1,0 +1,89 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="5B1BE71D-2276-A016-020F-662335F61ABF" name="tb_morada">
+<createdBy>lucca</createdBy>
+<createdTime>2022-02-15 16:23:07 UTC</createdTime>
+<generatorID>7586443C-86B3-EE02-9757-46A25A8802A0</generatorID>
+<ownerDesignName>modelo</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id_morada" id="D7C332B8-ACE4-3BF3-4371-C272A019A325">
+<createdBy>lucca</createdBy>
+<createdTime>2022-02-15 16:23:07 UTC</createdTime>
+<generatorID>4C3E5B98-03AC-E2C8-AFEE-6025F7F47F72</generatorID>
+<ownerDesignName>modelo</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>10</dataTypePrecision>
+<ownDataTypeParameters>,10,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="nr_morada" id="80FC16B8-23F7-0A46-2F95-FEDD556F5AF6">
+<createdBy>lucca</createdBy>
+<createdTime>2022-02-15 16:23:07 UTC</createdTime>
+<generatorID>072C7EE6-4CE0-9DFE-73F8-4304AFC7E5B7</generatorID>
+<ownerDesignName>modelo</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>10</dataTypePrecision>
+<ownDataTypeParameters>,10,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="tipo_morada" id="FA7015BA-CC6C-6FB2-BE5D-AECC7839CA6E">
+<createdBy>lucca</createdBy>
+<createdTime>2022-02-15 16:23:07 UTC</createdTime>
+<generatorID>A4DAA5DA-4D40-8FD2-C5B3-2A7DB15C1563</generatorID>
+<ownerDesignName>modelo</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20</dataTypeSize>
+<ownDataTypeParameters>20,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="tb_condominio_id_condominio" id="22016BA4-ABD4-882A-83FF-61C916D03C66">
+<createdBy>lucca</createdBy>
+<createdTime>2022-02-15 16:23:07 UTC</createdTime>
+<generatorID>76FBB49B-FE18-8F8A-66AC-90A7FC7CE2C9</generatorID>
+<ownerDesignName>modelo</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>10</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="D347A898-1DE3-07AD-961C-F809B523E7B5" referredColumn="26B60D27-7A37-2E94-E6EC-8218F987B8B9"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="A5D46965-0C68-269B-2AA6-1DF86D94F952" name="tb_morada_PK">
+<createdBy>lucca</createdBy>
+<createdTime>2022-02-15 16:23:07 UTC</createdTime>
+<generatorID>935118C5-C455-46CF-7D5A-045F1AB9377F</generatorID>
+<ownerDesignName>modelo</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="D7C332B8-ACE4-3BF3-4371-C272A019A325"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="4126CA70-B0EF-9098-FE3E-E5754FD3DD2D" name="tb_morada_tb_condominio_FK">
+<createdBy>lucca</createdBy>
+<createdTime>2022-02-15 16:23:07 UTC</createdTime>
+<generatorID>C4A43E53-5B31-B98E-9058-328799831A16</generatorID>
+<ownerDesignName>modelo</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="22016BA4-ABD4-882A-83FF-61C916D03C66"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>
