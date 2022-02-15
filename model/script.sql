@@ -1,4 +1,4 @@
--- DELETAR HISTORICO --
+-- DELETAR HISTORICO (COMPUTE CASO AS ESTRURAS JA EXISTAM NO BANCO) --
 
 drop table tb_condominio cascade constraints;
 drop table tb_morador cascade constraints;
@@ -57,6 +57,7 @@ CREATE TABLE tb_registro_servico (
     id_registro                NUMBER(10) NOT NULL,
     dt_inicio                  TIMESTAMP WITH LOCAL TIME ZONE NOT NULL,
     dt_termino                 TIMESTAMP WITH LOCAL TIME ZONE NOT NULL,
+    status                     VARCHAR2(15) NOT NULL,
     tb_prestador_id_prestador  NUMBER(10) NOT NULL,
     tb_morador_id_morador      NUMBER(10) NOT NULL,
     tb_servico_id_servico      NUMBER(10) NOT NULL
