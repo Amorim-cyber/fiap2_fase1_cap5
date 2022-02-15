@@ -25,7 +25,7 @@ public class Prestador {
 	private String nome;
 	
 	@Column(name="nr_prestador",nullable=false)
-	private Long telefone;
+	private int telefone;
 	
 	@OneToMany(mappedBy = "prestador")
 	private List<Registro> registros;
@@ -33,7 +33,7 @@ public class Prestador {
 	public Prestador() {
 	}
 	
-	public Prestador(int id, String nome, Long telefone, List<Registro> registros) {
+	public Prestador(int id, String nome, int telefone, List<Registro> registros) {
 		this.id = id;
 		this.nome = nome;
 		this.telefone = telefone;
@@ -58,11 +58,11 @@ public class Prestador {
 		this.nome = nome;
 	}
 
-	public Long getTelefone() {
+	public int getTelefone() {
 		return telefone;
 	}
 
-	public void setTelefone(Long telefone) {
+	public void setTelefone(int telefone) {
 		this.telefone = telefone;
 	}
 
