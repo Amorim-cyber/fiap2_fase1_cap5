@@ -7,7 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -29,17 +29,17 @@ public class Condominio {
 	@Column(name="endereco",nullable=false,length=200)
 	private String endereco;
 	
-	@ManyToMany(mappedBy="condominios")
-	private List<Morador> moradores;
+	@OneToMany(mappedBy = "condominio")
+	private List<Morada> moradas;
 
 	public Condominio() {
 	}
 
-	public Condominio(int id, String nome, String endereco, List<Morador> moradores) {
+	public Condominio(int id, String nome, String endereco, List<Morada> moradas) {
 		this.id = id;
 		this.nome = nome;
 		this.endereco = endereco;
-		this.moradores = moradores;
+		this.moradas = moradas;
 	}
 
 
@@ -68,12 +68,12 @@ public class Condominio {
 		this.endereco = endereco;
 	}
 
-	public List<Morador> getMoradores() {
-		return moradores;
+	public List<Morada> getMoradas() {
+		return moradas;
 	}
 
-	public void setMoradores(List<Morador> moradores) {
-		this.moradores = moradores;
+	public void setMoradas(List<Morada> moradas) {
+		this.moradas = moradas;
 	}
 	
 	
