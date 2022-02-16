@@ -150,7 +150,7 @@ Vamos formalizar as relações em nosso programa.
 
 * <b>Relação Muitos para Muitos:</b> 
 
-  As entidades `Morador` e `morada` possuem relação N x N. Adicionamos as seguintes linhas de código nos seguintes arquivos:
+  As entidades `Morador` e `Morada` possuem relação N x N. Adicionamos as seguintes linhas de código nos seguintes arquivos:
 
   <b>Morador.java:</b>
 
@@ -170,7 +170,7 @@ Vamos formalizar as relações em nosso programa.
 
 * <b>Relação Muitos para Um:</b>
 
-  A entidade `Registro Serviço` possui uma relação de muitos para um com as entidades `Serviço`, `Morador` e `Prestador`, da mesma forma que `Morada` tem sobre `condominio`. Adicionamos as seguintes linhas de código nos seguintes arquivos:
+  A entidade `Registro Serviço` possui uma relação de muitos para um com as entidades `Serviço`, `Morador` e `Prestador`, da mesma forma que `Morada` tem sobre `Condominio`. Adicionamos as seguintes linhas de código nos seguintes arquivos:
 
   <b>Registro.java</b>:
 
@@ -200,7 +200,7 @@ Vamos formalizar as relações em nosso programa.
 
 * <b>Relação Um para Muitos:</b>
 
-  As entidades  `Serviço`, `Morador` e `Prestador` possuem uma relação de um para muitos em relação a `Registro Serviço`, da mesma forma que `condominio` tem sobre `Morada`. Adicionamos as seguintes linhas de código nos seguintes arquivos:
+  As entidades  `Serviço`, `Morador` e `Prestador` possuem uma relação de um para muitos em relação a `Registro Serviço`, da mesma forma que `Condominio` tem sobre `Morada`. Adicionamos as seguintes linhas de código nos seguintes arquivos:
 
   <b>Morador.java</b>
 
@@ -535,5 +535,164 @@ Neste caso, o código está buscando os dados da entidade `Morador` e imprimindo
 
 <img src="assets/buscar.PNG">
 
+<h4>Atualizar:</h4>
+
+Seguimos com a criação da classe `MainAtualizacao.java` que vai demonstrar a operação de atualização. Neste exemplo abaixo realizamos a troca dos dados de um condomínio.
+
+````java
+package br.com.encontro.main;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
+import br.com.encontro.entity.Condominio;
+import br.com.encontro.util.Mock;
+
+public class MainAtualizacao {
+
+	public static void main(String[] args) {
+		EntityManagerFactory fabrica = Persistence.createEntityManagerFactory("encontro");
+		EntityManager em = fabrica.createEntityManager();
+		
+		new Mock(em);
+		
+		Condominio condominio = em.find(Condominio.class, 1);
+		
+		System.out.println();
+		System.out.println("NOME CONDOMINIO ANTIGO:");
+		System.out.println(condominio.getNome());
+		System.out.println();
+		System.out.println("ENDEREÇO CONDOMINIO ANTIGO:");
+		System.out.println(condominio.getEndereco());
+		System.out.println();
+		System.out.println("-------------------------------------------------------");
+		System.out.println();
+		
+		condominio.setNome("Condomínio Lagoa do Itanhangá");
+		condominio.setEndereco("Estr. do Itanhangá, 2222 - Itanhangá, Rio de Janeiro - RJ, 22753-005");
+		
+		System.out.println("NOME CONDOMINIO NOVO:");
+		System.out.println(condominio.getNome());
+		System.out.println();
+		System.out.println("ENDEREÇO CONDOMINIO NOVO:");
+		System.out.println(condominio.getEndereco());
+		System.out.println();
+		
+		em.close();
+		fabrica.close();
+
+	}
+
+}
+````
+
+De forma similar podemos realizar a mesma operação utilizando o método `merge()` conforme abaixo.
+
+````java
+package br.com.fiap.smartcities.teste;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
+import br.com.fiap.smartcities.entity.Cliente;
+
+public class TesteAtualizacao {
+
+	public static void main(String[] args) {
+		EntityManagerFactory fabrica = Persistence.createEntityManagerFactory("smartcities");
+		EntityManager em = fabrica.createEntityManager();
+		
+		/*Cliente cliente = em.find(Cliente.class, 1);
+		
+		System.out.println(cliente.getId() + " - " +cliente.getNome());
+		
+		cliente.setNome("Henrique");
+		
+		em.getTransaction().begin();
+		em.getTransaction().commit();
+		
+		System.out.println(cliente.getId() + " - " +cliente.getNome());*/
+		
+		Cliente cliente = new Cliente(1, "Thiago");
+		
+		em.merge(cliente);
+		
+		em.getTransaction().begin();
+		em.getTransaction().commit();
+		
+		System.out.println(cliente.getId() + " - " +cliente.getNome());
+		
+		em.close();
+		fabrica.close();
+
+	}
+
+}
+
+````
+
+ Executando o código, podemos perceber que a operação foi um sucesso.
+
+<img src="assets/atualizar.PNG">
+
+<h4>Deletar:</h4>
+
+Com o intuito de mostrar a operação de remoção, alterei as configurações do arquivo `persistence.xml` para realizar atualizações do banco.
+
+````xml
+<property name="hibernate.hbm2ddl.auto" value="update" />
+````
+
+Foi criado a classe `MainRemocao.java` para simular a operação de remoção de um dado presente na tabela de `Serviços`.
+
+````java
+package br.com.encontro.main;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import br.com.encontro.entity.Servico;
+
+public class MainRemocao {
+
+	public static void main(String[] args) {
+		EntityManagerFactory fabrica = Persistence.createEntityManagerFactory("encontro");
+		EntityManager em = fabrica.createEntityManager();
+		
+		Servico servico = em.find(Servico.class, 1);
+		
+		try {
+			em.remove(servico);
+			em.getTransaction().begin();
+			em.getTransaction().commit();
+			
+		}catch(Exception e) {
+			if(em.getTransaction().isActive()) {
+				em.getTransaction().rollback();
+			}
+		}
+		
+		em.close();
+		fabrica.close();
+		
+	}
+
+}
+
+````
+
+<b>IMPORTANTE:</b>
+
+O código acima só irá funcionar se as tabelas já estiverem sido criadas. 
+
+Executando o código temos o seguinte resultado:
+
+<img src="assets/remover.PNG">
 
 
+
+<a href="https://github.com/Amorim-cyber/fiap2_fase1_cap5">CLIQUE AQUI PARA VISUALIZAR O PROJETO NO GITHUB</a>
+
+<B>FORTE ABRAÇO!</B>
