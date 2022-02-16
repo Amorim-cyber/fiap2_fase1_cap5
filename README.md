@@ -370,7 +370,7 @@ Reparem que as inclusões estão em cascata `(cascade=CascadeType.PERSIST)` nest
 
 Ao processar o código acima no programa e consultar o SGBD Oracle, podemos perceber que as inclusões foram um sucesso!
 
-<img src="assets/incluir.GIF">
+<img src="assets/Incluir.GIF">
 
 <h4>Buscar:</h4>
 
