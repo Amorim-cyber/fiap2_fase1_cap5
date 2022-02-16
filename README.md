@@ -2,7 +2,7 @@
 
 <h3>Início</h3>
 
-No <a href="https://github.com/Amorim-cyber/fiap2_fase1_cap4">projeto do capítulo 4</a> montei o modelo lógico de um sistema que facilite o encontro de moradores de condomínios com prestadores de serviços. O sistema apresenta também um controle de registro de serviço caso o morador queira contratar o prestador.  A relação ficou da seguinte forma: 
+No <a href="https://github.com/Amorim-cyber/fiap2_fase1_cap4">projeto do capítulo 4</a> montei as entidades de um sistema que facilite o encontro de moradores de condomínios com prestadores de serviços. O sistema apresenta também um controle de registro de serviço caso o morador queira contratar o prestador.  A relação ficou da seguinte forma: 
 
 <img src="assets/tabelas.PNG">
 
@@ -14,9 +14,9 @@ No <a href="https://github.com/Amorim-cyber/fiap2_fase1_cap4">projeto do capítu
 * <b>tb_servico:</b> Tabela que vai armazenar dados do serviço. Contém o nome do serviço.
 * <b>tb_prestador:</b> Tabela que vai armazenar dados do prestador de serviço. Contém o nome, número de telefone do prestador.
 * <b>tb_registro_servico:</b> Tabela que vai armazenar dados do registro de serviço. Contém a data de inicio, a data de fim de serviço e o status do registro.
-* <b style="color:grey">Relação servico_registro:</b> Um tipo de serviço deve ser registrado e um registro deve conter pelo menos um tipo de serviço.
-* <b style="color:grey">Relação prestador_registro:</b> Um prestador de serviço pode ser registrado, contudo um registro deve conter pelo menos um prestador de serviço.
-* <b style="color:grey">Relação morador_registro:</b> Um morador pode ser registrado, contudo um registro deve conter pelo menos um morador.
+* <b style="color:grey">Relação servico_registro:</b> Um tipo de serviço deve ser registrado e um registro deve conter  um tipo de serviço.
+* <b style="color:grey">Relação prestador_registro:</b> Um prestador de serviço deve ser registrado e um registro deve conter um prestador de serviço.
+* <b style="color:grey">Relação morador_registro:</b> Um morador deve ser registrado e um registro deve conter um morador.
 
 Conforme solicitado, este projeto tem como objetivo montar o script de criação de tabelas, incluir as relações entre entidades no programa e implementar as operações de CRUD.
 
@@ -176,16 +176,16 @@ Vamos formalizar as relações em nosso programa.
 
   ````java
   @JoinColumn(name = "id_servico")
-  	@ManyToOne
+  	@ManyToOne(cascade=CascadeType.PERSIST)
   	private Servico tipoServico;
   	
   	@JoinColumn(name = "id_morador")
-  	@ManyToOne
+  	@ManyToOne(cascade=CascadeType.PERSIST)
   	private Morador morador;
   	
   	@JoinColumn(name = "id_prestador")
-  	@ManyToOne
-  	private Morador prestador;
+  	@ManyToOne(cascade=CascadeType.PERSIST)
+  	private Prestador prestador;
   ````
 
    <b>Morada.java:</b>
@@ -238,7 +238,302 @@ Pronto! Relações formalizadas!
 
 <h3> Implementar o CRUD</h3>
 
+Seguindo com o projeto, vamos criar as operações de incluir, buscar, atualizar e deletar ao nosso programa.
 
+<h4>Incluir:</h4>
+
+Iremos adicionar o arquivo `MainCadastro.java` para testar as inclusões. Código disponibilizado logo abaixo 
+
+````java
+package br.com.encontro.main;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
+import br.com.encontro.entity.Condominio;
+import br.com.encontro.entity.Estado;
+import br.com.encontro.entity.Estrutura;
+import br.com.encontro.entity.Morada;
+import br.com.encontro.entity.Morador;
+import br.com.encontro.entity.Ocupacao;
+import br.com.encontro.entity.Prestador;
+import br.com.encontro.entity.Registro;
+import br.com.encontro.entity.Servico;
+
+public class MainCadastro {
+
+	public static void main(String[] args) {
+		EntityManagerFactory fabrica = Persistence.createEntityManagerFactory("encontro");
+		EntityManager em = fabrica.createEntityManager();
+		
+		// Incluindo condominios 
+		
+		Condominio condominio1 = new Condominio(0,
+		"Condomínio do Edifício Yellow Bali",
+		"Av. Alfredo Balthazar da Silveira, 289 - bloco 2 - Recreio dos Bandeirantes, Rio de Janeiro - RJ, 22790-710",
+		null);
+		Condominio condominio2 = new Condominio(0,
+		"Condomínio London Green",
+		"R. César Lattes, 1000 - Barra da Tijuca, Rio de Janeiro - RJ, 22793-329",
+		null);
+		
+		Condominio condominio3 = new Condominio(0,
+		"Vila Pan-Americana",
+		"Av. Cláudio Besserman Vianna - Jacarepaguá, Rio de Janeiro - RJ, 22775-036",
+		null);
+		
+		// Incluindo moradas
+		
+		Morada morada1 = new Morada(0,55,Estrutura.CASA,null,condominio2);
+		
+		Morada morada2 = new Morada(0,104,Estrutura.APARTAMENTO,null,condominio3);
+		
+		Morada morada3 = new Morada(0,204,Estrutura.APARTAMENTO,null,condominio1);
+		
+		Morada morada4 = new Morada(0,105,Estrutura.APARTAMENTO,null,condominio3);
+		
+		Morada morada5 = new Morada(0,70,Estrutura.CASA,null,condominio2);
+		
+		List<Morada> moradas1 = new ArrayList<Morada>();
+		moradas1.add(morada1);
+		
+		List<Morada> moradas2 = new ArrayList<Morada>();
+		moradas2.add(morada2);
+		
+		List<Morada> moradas3 = new ArrayList<Morada>();
+		moradas3.add(morada3);
+		
+		List<Morada> moradas4 = new ArrayList<Morada>();
+		moradas4.add(morada4);
+		moradas4.add(morada5);
+		
+		// Incluindo moradores
+		
+		Morador morador1 = new Morador(0,"Mario",moradas1,null);
+		Morador morador2 = new Morador(0,"Joana",moradas2,null);
+		Morador morador3 = new Morador(0,"Isadora",moradas3,null);
+		Morador morador4 = new Morador(0,"David",moradas4,null);
+		
+
+		// Incluindo servicos
+		
+		Servico servico1 = new Servico(0,Ocupacao.ELETRICISTA,null);
+		Servico servico2 = new Servico(0,Ocupacao.ENCANADOR,null);
+		Servico servico3 = new Servico(0,Ocupacao.PINTOR,null);
+		Servico servico4 = new Servico(0,Ocupacao.PEDREIRO,null);
+		
+		// Incluindo prestadores
+		
+		Prestador prestador1 = new Prestador(0,"José",24477155,null);
+		Prestador prestador2 = new Prestador(0,"Cleiton",24277155,null);
+		
+		//Incluindo registros
+		
+		Registro registro1 = new Registro(0,servico1,morador1,prestador1,Estado.ABERTO);
+		Registro registro2 = new Registro(0,servico2,morador2,prestador1,Estado.ABERTO);
+		Registro registro3 = new Registro(0,servico3,morador3,prestador2,Estado.ABERTO);
+		Registro registro4 = new Registro(0,servico4,morador4,prestador2,Estado.ABERTO);
+		
+		// Salvando registros
+		
+		try {
+			em.persist(registro1);
+			em.persist(registro2);
+			em.persist(registro3);
+			em.persist(registro4);
+			
+			
+			em.getTransaction().begin();
+			em.getTransaction().commit();
+		}catch(Exception e) {
+			if(em.getTransaction().isActive()) {
+				em.getTransaction().rollback();
+			}
+		}
+		
+		
+		
+		em.close();
+		fabrica.close();
+		
+	}
+
+}
+
+````
+
+Reparem que as inclusões estão em cascata `(cascade=CascadeType.PERSIST)` neste exemplo. O método `persist` está apenas recebendo os objetos da classe `Registro.java`. Ao persistir sobre `Registro`, também persiste sobre `Morador`, `Servico` e `Prestador`, que por sua vez persiste em `Morada` e `Condominio`.
+
+Ao processar o código acima no programa e consultar o SGBD Oracle, podemos perceber que as inclusões foram um sucesso!
+
+<img src="assets/incluir.GIF">
+
+<h4>Buscar:</h4>
+
+Para demonstrar as operações de busca vamos criar a classe `MainBuscar.java`.
+
+Por motivos educacionais, estamos sempre deletando e recriando o banco em cada execução. Afim de evitar inclusão dos dados no código `MainBuscar.java`, criei a classe `Mock.java` para armazena-los.
+
+````java
+package br.com.encontro.util;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.EntityManager;
+
+import br.com.encontro.entity.Condominio;
+import br.com.encontro.entity.Estado;
+import br.com.encontro.entity.Estrutura;
+import br.com.encontro.entity.Morada;
+import br.com.encontro.entity.Morador;
+import br.com.encontro.entity.Ocupacao;
+import br.com.encontro.entity.Prestador;
+import br.com.encontro.entity.Registro;
+import br.com.encontro.entity.Servico;
+
+public class Mock {
+	
+	public Mock(EntityManager em) {
+		
+		// Incluindo condominios 
+		
+				Condominio condominio1 = new Condominio(0,
+				"Condomínio do Edifício Yellow Bali",
+				"Av. Alfredo Balthazar da Silveira, 289 - bloco 2 - Recreio dos Bandeirantes, Rio de Janeiro - RJ, 22790-710",
+				null);
+				Condominio condominio2 = new Condominio(0,
+				"Condomínio London Green",
+				"R. César Lattes, 1000 - Barra da Tijuca, Rio de Janeiro - RJ, 22793-329",
+				null);
+				
+				Condominio condominio3 = new Condominio(0,
+				"Vila Pan-Americana",
+				"Av. Cláudio Besserman Vianna - Jacarepaguá, Rio de Janeiro - RJ, 22775-036",
+				null);
+				
+				// Incluindo moradas
+				
+				Morada morada1 = new Morada(0,55,Estrutura.CASA,null,condominio2);
+				
+				Morada morada2 = new Morada(0,104,Estrutura.APARTAMENTO,null,condominio3);
+				
+				Morada morada3 = new Morada(0,204,Estrutura.APARTAMENTO,null,condominio1);
+				
+				Morada morada4 = new Morada(0,105,Estrutura.APARTAMENTO,null,condominio3);
+				
+				Morada morada5 = new Morada(0,70,Estrutura.CASA,null,condominio2);
+				
+				List<Morada> moradas1 = new ArrayList<Morada>();
+				moradas1.add(morada1);
+				
+				List<Morada> moradas2 = new ArrayList<Morada>();
+				moradas2.add(morada2);
+				
+				List<Morada> moradas3 = new ArrayList<Morada>();
+				moradas3.add(morada3);
+				
+				List<Morada> moradas4 = new ArrayList<Morada>();
+				moradas4.add(morada4);
+				moradas4.add(morada5);
+				
+				// Incluindo moradores
+				
+				Morador morador1 = new Morador(0,"Mario",moradas1,null);
+				Morador morador2 = new Morador(0,"Joana",moradas2,null);
+				Morador morador3 = new Morador(0,"Isadora",moradas3,null);
+				Morador morador4 = new Morador(0,"David",moradas4,null);
+				
+
+				// Incluindo servicos
+				
+				Servico servico1 = new Servico(0,Ocupacao.ELETRICISTA,null);
+				Servico servico2 = new Servico(0,Ocupacao.ENCANADOR,null);
+				Servico servico3 = new Servico(0,Ocupacao.PINTOR,null);
+				Servico servico4 = new Servico(0,Ocupacao.PEDREIRO,null);
+				
+				// Incluindo prestadores
+				
+				Prestador prestador1 = new Prestador(0,"José",24477155,null);
+				Prestador prestador2 = new Prestador(0,"Cleiton",24277155,null);
+				
+				//Incluindo registros
+				
+				Registro registro1 = new Registro(0,servico1,morador1,prestador1,Estado.ABERTO);
+				Registro registro2 = new Registro(0,servico2,morador2,prestador1,Estado.ABERTO);
+				Registro registro3 = new Registro(0,servico3,morador3,prestador2,Estado.ABERTO);
+				Registro registro4 = new Registro(0,servico4,morador4,prestador2,Estado.ABERTO);
+				
+				// Salvando registros
+				
+				try {
+					em.persist(registro1);
+					em.persist(registro2);
+					em.persist(registro3);
+					em.persist(registro4);
+					
+					
+					em.getTransaction().begin();
+					em.getTransaction().commit();
+				}catch(Exception e) {
+					if(em.getTransaction().isActive()) {
+						em.getTransaction().rollback();
+					}
+				}
+		
+	}
+
+}
+
+````
+
+Ao executar o arquivo, só precisamos instanciar a classe `Mock.java` para incluir os dados que serão consultados. Segue abaixo o código de buscar:
+
+````java
+package br.com.encontro.main;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
+import br.com.encontro.entity.Morador;
+import br.com.encontro.util.Mock;
+
+public class MainBuscar {
+
+	public static void main(String[] args) {
+		EntityManagerFactory fabrica = Persistence.createEntityManagerFactory("encontro");
+		EntityManager em = fabrica.createEntityManager();
+		
+		new Mock(em);
+		
+		Morador morador1 = em.find(Morador.class, 1);
+		Morador morador2 = em.find(Morador.class, 2);
+		Morador morador3 = em.find(Morador.class, 3);
+		Morador morador4 = em.find(Morador.class, 4);
+		
+		System.out.println("ID\tNOME");
+		System.out.println(morador1.getId() + "\t" +morador1.getNome());
+		System.out.println(morador2.getId() + "\t" +morador2.getNome());
+		System.out.println(morador3.getId() + "\t" +morador3.getNome());
+		System.out.println(morador4.getId() + "\t" +morador4.getNome());
+		
+		
+		em.close();
+		fabrica.close();
+
+	}
+
+}
+````
+
+Neste caso, o código está buscando os dados da entidade `Morador` e imprimindo-os no console. Segue ilustração da execução do código:
+
+<img src="assets/buscar.PNG">
 
 
 
