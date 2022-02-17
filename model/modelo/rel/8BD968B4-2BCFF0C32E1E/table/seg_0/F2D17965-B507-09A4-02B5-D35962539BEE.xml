@@ -8,6 +8,22 @@
 <existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
 <parsed>true</parsed>
 <columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="tb_condominio_id_condominio" id="6B3E2B48-004E-DC84-8E81-3EC71D9A9EFE">
+<createdBy>lucca</createdBy>
+<createdTime>2022-02-14 19:13:15 UTC</createdTime>
+<generatorID>E81A6BC5-2D0B-D91E-DCF8-6AF2DCB1279D</generatorID>
+<ownerDesignName>modelo</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>10</dataTypePrecision>
+<ownDataTypeParameters>,10,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="4CA2E288-79A9-8D20-A0B4-C6A9070C973F" referredColumn="26B60D27-7A37-2E94-E6EC-8218F987B8B9"/>
+</associations>
+</Column>
 <Column name="tb_morador_id_morador" id="7B36C963-43FD-F167-D00C-BA653E3EDA6E">
 <createdBy>lucca</createdBy>
 <createdTime>2022-02-14 19:13:15 UTC</createdTime>
@@ -42,6 +58,17 @@
 </Column>
 </columns>
 <indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="FFCC122B-5108-FB2F-BBA5-1E7EDE24C80E" name="tb_registro_condominio_tb_condominio_FK">
+<createdBy>lucca</createdBy>
+<createdTime>2022-02-14 19:13:15 UTC</createdTime>
+<generatorID>F522A78E-DF74-3BB4-C7A5-6B221D48C2FF</generatorID>
+<ownerDesignName>modelo</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="6B3E2B48-004E-DC84-8E81-3EC71D9A9EFE"/>
+</indexColumnUsage>
+</ind_PK_UK>
 <ind_PK_UK id="44140494-3918-99C3-D2C4-3212C7DE34C1" name="tb_registro_morada_tb_morador_FK">
 <createdBy>lucca</createdBy>
 <createdTime>2022-02-14 19:13:15 UTC</createdTime>

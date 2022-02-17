@@ -41,27 +41,15 @@
 <dataTypeSize>100</dataTypeSize>
 <ownDataTypeParameters>100,,</ownDataTypeParameters>
 </Attribute>
-<Attribute name="nr_morador" id="022DBCFC-19B2-A7BC-2E2A-2FDC99140A6C">
-<createdBy>lucca</createdBy>
-<createdTime>2022-02-09 00:41:37 UTC</createdTime>
-<ownerDesignName>modelo</ownerDesignName>
-<engineerTo>
-<item key="8BD968B4-FE0E-FCE3-19F1-2BCFF0C32E1E" value="true"/>
-</engineerTo>
-<useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
-<logicalDatatype>LOGDT019</logicalDatatype>
-<dataTypePrecision>19</dataTypePrecision>
-<ownDataTypeParameters>,19,</ownDataTypeParameters>
-</Attribute>
 </attributes>
 <identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
 <identifier id="760DA0F4-9208-B4D8-EFC6-0DEE03F53566" name="tb_morador PK">
 <createdBy>lucca</createdBy>
 <createdTime>2022-02-09 00:42:59 UTC</createdTime>
 <ownerDesignName>modelo</ownerDesignName>
+<shouldEngineer>false</shouldEngineer>
 <engineerTo>
-<item key="8BD968B4-FE0E-FCE3-19F1-2BCFF0C32E1E" value="true"/>
+<item key="8BD968B4-FE0E-FCE3-19F1-2BCFF0C32E1E" value="false"/>
 </engineerTo>
 <pk>true</pk>
 <usedAttributes>
