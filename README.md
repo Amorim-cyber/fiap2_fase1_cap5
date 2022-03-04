@@ -18,7 +18,9 @@ No <a href="https://github.com/Amorim-cyber/fiap2_fase1_cap4">projeto do capítu
 * <b style="color:grey">Relação prestador_registro:</b> Um prestador de serviço deve ser registrado e um registro deve conter um prestador de serviço.
 * <b style="color:grey">Relação morador_registro:</b> Um morador deve ser registrado e um registro deve conter um morador.
 
-Conforme solicitado, este projeto tem como objetivo montar o script de criação de tabelas, incluir as relações entre entidades no programa e implementar as operações de CRUD.
+<h3>OBJETIVO DO PROJETO:</h3>
+
+Conforme solicitado, este projeto tem como objetivo montar o script de criação de tabelas, criar as demais classes, incluir as relações entre entidades no programa e implementar as operações de CRUD.
 
 <HR> 
 
@@ -143,10 +145,438 @@ ALTER TABLE tb_registro_servico
 <b>OBS:</b> O programa em `java` efetua automaticamente todo o processo acima com o `hibernate`. Contudo caso haja algum problema, você pode utiliza-ló para criar manualmente as estruturas no seu banco. 
 
 <hr>
+<h3>Criando as demais classes</h3>
+
+1. <b>Registro.java</b>
+
+   Neste projeto, coloquei o enum `Estado` para fora da classe, criando assim a classe `Estado.java`
+
+   ````java
+   package br.com.encontro.entity;
+   
+   public enum Estado {
+   	
+   	ABERTO, FECHADO
+   
+   }
+   
+   ````
+
+2. <b>Condominio.java</b>
+
+   `````java
+   package br.com.encontro.entity;
+   
+   import java.util.List;
+   
+   import javax.persistence.Column;
+   import javax.persistence.Entity;
+   import javax.persistence.GeneratedValue;
+   import javax.persistence.GenerationType;
+   import javax.persistence.Id;
+   import javax.persistence.OneToMany;
+   import javax.persistence.SequenceGenerator;
+   import javax.persistence.Table;
+   
+   @Entity
+   @Table(name="tb_condominio")
+   public class Condominio {
+   
+   	@Id
+   	@SequenceGenerator(name="condominio",sequenceName="sq_tb_condominio",allocationSize=1)
+   	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="condominio")
+   	@Column(name="id_condominio")
+   	private int id;
+   	
+   	
+   	@Column(name="nm_condominio",nullable=false,length=100)
+   	private String nome;
+   	
+   	
+   	@Column(name="endereco",nullable=false,length=200)
+   	private String endereco;
+   	
+   	@OneToMany(mappedBy = "condominio")
+   	private List<Morada> moradas;
+   
+   	public Condominio() {
+   	}
+   
+   	public Condominio(int id, String nome, String endereco, List<Morada> moradas) {
+   		this.id = id;
+   		this.nome = nome;
+   		this.endereco = endereco;
+   		this.moradas = moradas;
+   	}
+   
+   
+   
+   	public int getId() {
+   		return id;
+   	}
+   
+   	public void setId(int id) {
+   		this.id = id;
+   	}
+   
+   	public String getNome() {
+   		return nome;
+   	}
+   
+   	public void setNome(String nome) {
+   		this.nome = nome;
+   	}
+   
+   	public String getEndereco() {
+   		return endereco;
+   	}
+   
+   	public void setEndereco(String endereco) {
+   		this.endereco = endereco;
+   	}
+   
+   	public List<Morada> getMoradas() {
+   		return moradas;
+   	}
+   
+   	public void setMoradas(List<Morada> moradas) {
+   		this.moradas = moradas;
+   	}
+   	
+   	
+   	
+   }
+   
+   `````
+
+   Após criada a classe incluir a seguinte linha em `persistence.xml`
+
+   ````xml
+   <class>br.com.encontro.entity.Condominio</class>
+   ````
+
+3. <b>Morada.java</b>
+
+   Antes de criar a classe, vamos criar o enum `Estrutura.java`
+
+   ````java
+   package br.com.encontro.entity;
+   
+   public enum Estrutura {
+   
+   	CASA, APARTAMENTO
+   	
+   }
+   
+   ````
+
+   Segue abaixo o código da classe
+
+   ````java
+   package br.com.encontro.entity;
+   
+   import java.util.List;
+   
+   import javax.persistence.CascadeType;
+   import javax.persistence.Column;
+   import javax.persistence.Entity;
+   import javax.persistence.EnumType;
+   import javax.persistence.Enumerated;
+   import javax.persistence.GeneratedValue;
+   import javax.persistence.GenerationType;
+   import javax.persistence.Id;
+   import javax.persistence.JoinColumn;
+   import javax.persistence.ManyToMany;
+   import javax.persistence.ManyToOne;
+   import javax.persistence.SequenceGenerator;
+   import javax.persistence.Table;
+   
+   @Entity
+   @Table(name="tb_morada")
+   public class Morada {
+   
+   	@Id
+   	@SequenceGenerator(name="morada",sequenceName="sq_tb_morada",allocationSize=1)
+   	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="morada")
+   	@Column(name="id_morada")
+   	private int id;
+   	
+   	@Column(name="nr_morada",nullable=false)
+   	private int numero;
+   	
+   	@Enumerated(EnumType.STRING)
+   	@Column(name="tipo_morada")
+   	private Estrutura estrutura;
+   	
+   	@ManyToMany(mappedBy="moradas")
+   	private List<Morador> moradores;
+   	
+   	@JoinColumn(name = "id_condominio")
+   	@ManyToOne(cascade=CascadeType.PERSIST)
+   	private Condominio condominio;
+   
+   	public Morada() {
+   	}
+   
+   	public Morada(int id, int numero, Estrutura estrutura, List<Morador> moradores, Condominio condominio) {
+   		this.id = id;
+   		this.numero = numero;
+   		this.estrutura = estrutura;
+   		this.moradores = moradores;
+   		this.condominio = condominio;
+   	}
+   
+   	public int getId() {
+   		return id;
+   	}
+   
+   	public void setId(int id) {
+   		this.id = id;
+   	}
+   
+   	public int getNumero() {
+   		return numero;
+   	}
+   
+   	public void setNumero(int numero) {
+   		this.numero = numero;
+   	}
+   
+   	public Estrutura getEstrutura() {
+   		return estrutura;
+   	}
+   
+   	public void setEstrutura(Estrutura estrutura) {
+   		this.estrutura = estrutura;
+   	}
+   
+   	public List<Morador> getMoradores() {
+   		return moradores;
+   	}
+   
+   	public void setMoradores(List<Morador> moradores) {
+   		this.moradores = moradores;
+   	}
+   
+   	public Condominio getCondominio() {
+   		return condominio;
+   	}
+   
+   	public void setCondominio(Condominio condominio) {
+   		this.condominio = condominio;
+   	}
+   	
+   	
+   	
+   	
+   }
+   
+   ````
+
+   Após criada a classe incluir a seguinte linha em `persistence.xml`
+
+   ````xml
+   <class>br.com.encontro.entity.Morada</class>
+   ````
+
+4. <b>Morador.java</b>
+
+   ````java
+   package br.com.encontro.entity;
+   
+   import java.util.List;
+   
+   import javax.persistence.CascadeType;
+   import javax.persistence.Column;
+   import javax.persistence.Entity;
+   import javax.persistence.GeneratedValue;
+   import javax.persistence.GenerationType;
+   import javax.persistence.Id;
+   import javax.persistence.JoinTable;
+   import javax.persistence.JoinColumn;
+   import javax.persistence.ManyToMany;
+   import javax.persistence.OneToMany;
+   import javax.persistence.SequenceGenerator;
+   import javax.persistence.Table;
+   
+   @Entity
+   @Table(name="tb_morador")
+   public class Morador {
+   
+   	@Id
+   	@SequenceGenerator(name="morador",sequenceName="sq_tb_morador",allocationSize=1)
+   	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="morador")
+   	@Column(name="id_morador")
+   	private int id;
+   	
+   	@Column(name="nm_morador",nullable=false,length=100)
+   	private String nome;
+   	
+   	
+   	
+   	@ManyToMany(cascade=CascadeType.PERSIST)
+   	@JoinTable(joinColumns = @JoinColumn(name="id_morador"), 
+   	inverseJoinColumns = @JoinColumn(name="id_morada"), name = "tb_registro_morada")
+   	private List<Morada> moradas;
+   	
+   	@OneToMany(mappedBy = "morador")
+   	private List<Registro> registros;
+   	
+   	public Morador() {
+   	}
+   	
+   	public Morador(int id, String nome, List<Morada> moradas, List<Registro> registros) {
+   		this.id = id;
+   		this.nome = nome;
+   		this.moradas = moradas;
+   		this.registros = registros;
+   	}
+   
+   	public int getId() {
+   		return id;
+   	}
+   
+   	public void setId(int id) {
+   		this.id = id;
+   	}
+   
+   	public String getNome() {
+   		return nome;
+   	}
+   
+   	public void setNome(String nome) {
+   		this.nome = nome;
+   	}
+   
+   	public List<Morada> getMoradas() {
+   		return moradas;
+   	}
+   
+   	public void setMoradas(List<Morada> moradas) {
+   		this.moradas = moradas;
+   	}
+   
+   	public List<Registro> getRegistros() {
+   		return registros;
+   	}
+   
+   	public void setRegistros(List<Registro> registros) {
+   		this.registros = registros;
+   	}
+   	
+   	
+   	
+   }
+   
+   ````
+
+   Após criada a classe incluir a seguinte linha em `persistence.xml`
+
+   ````xml
+   <class>br.com.encontro.entity.Morador</class>
+   ````
+
+5. <b>Servico.java</b>
+
+   Antes de criar a classe, vamos criar o enum `Ocupacao.java`
+
+   ````java
+   package br.com.encontro.entity;
+   
+   public enum Ocupacao {
+   
+   	PINTOR, ELETRICISTA, PEDREIRO, ENCANADOR
+   	
+   }
+   
+   ````
+
+   Segue abaixo o código da classe
+
+   ````java
+   package br.com.encontro.entity;
+   
+   import java.util.List;
+   
+   import javax.persistence.Column;
+   import javax.persistence.Entity;
+   import javax.persistence.EnumType;
+   import javax.persistence.Enumerated;
+   import javax.persistence.GeneratedValue;
+   import javax.persistence.GenerationType;
+   import javax.persistence.Id;
+   import javax.persistence.OneToMany;
+   import javax.persistence.SequenceGenerator;
+   import javax.persistence.Table;
+   
+   @Entity
+   @Table(name="tb_servico")
+   public class Servico {
+   
+   	@Id
+   	@SequenceGenerator(name="servico",sequenceName="sq_tb_servico",allocationSize=1)
+   	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="servico")
+   	@Column(name="id_servico")
+   	private int id;
+   	
+   	@Enumerated(EnumType.STRING)
+   	@Column(name="nm_servico")
+   	private Ocupacao nome;
+   	
+   	@OneToMany(mappedBy = "tipoServico")
+   	private List<Registro> registros;
+   	
+   	public Servico() {
+   	}
+   
+   	public Servico(int id, Ocupacao nome, List<Registro> registros) {
+   		super();
+   		this.id = id;
+   		this.nome = nome;
+   		this.registros = registros;
+   	}
+   
+   	public int getId() {
+   		return id;
+   	}
+   
+   	public void setId(int id) {
+   		this.id = id;
+   	}
+   
+   	public Ocupacao getNome() {
+   		return nome;
+   	}
+   
+   	public void setNome(Ocupacao nome) {
+   		this.nome = nome;
+   	}
+   
+   	public List<Registro> getRegistros() {
+   		return registros;
+   	}
+   
+   	public void setRegistros(List<Registro> registros) {
+   		this.registros = registros;
+   	}
+   	
+   	
+   	
+   }
+   
+   ````
+
+   Após criada a classe incluir a seguinte linha em `persistence.xml`
+
+   ````xml
+   <class>br.com.encontro.entity.Morador</class>
+   ````
+
+<hr>
 
 <h3>Montar relação entre entidades</h3>
 
-Vamos formalizar as relações em nosso programa.
+Vamos explicar as relações em nosso programa.
 
 * <b>Relação Muitos para Muitos:</b> 
 
