@@ -1,4 +1,4 @@
-package br.com.encontro.main;
+package br.com.fiap.main;
 
 import javax.persistence.Persistence;
 
