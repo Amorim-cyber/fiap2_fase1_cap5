@@ -1,4 +1,4 @@
-package br.com.encontro.util;
+package br.com.fiap.util;
 
 import java.util.ArrayList;
 import java.util.List;
