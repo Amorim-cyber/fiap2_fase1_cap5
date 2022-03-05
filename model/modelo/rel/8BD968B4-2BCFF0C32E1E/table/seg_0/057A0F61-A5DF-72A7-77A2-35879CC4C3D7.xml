@@ -1,0 +1,68 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="057A0F61-A5DF-72A7-77A2-35879CC4C3D7" name="tb_ocupacao">
+<createdBy>lucca</createdBy>
+<createdTime>2022-03-05 12:57:35 UTC</createdTime>
+<generatorID>DEC6CED6-24F2-B9BF-D4F1-15A9AEFD3BF0</generatorID>
+<ownerDesignName>modelo</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="tb_prestador_id_prestador" id="35CAA89D-B656-EEED-6764-4C6F1CDB14AC">
+<createdBy>lucca</createdBy>
+<createdTime>2022-03-05 12:57:35 UTC</createdTime>
+<generatorID>03CC1E68-7A87-CF74-B742-1FF39B267B40</generatorID>
+<ownerDesignName>modelo</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>10</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="D2B4A845-930E-F529-0760-CD3EBFB564FE" referredColumn="FA18A8DE-3286-5750-F93B-32C2F96977A6"/>
+</associations>
+</Column>
+<Column name="tb_servico_id_servico" id="F2C154AD-9A0B-C678-2283-CEE860F7CB02">
+<createdBy>lucca</createdBy>
+<createdTime>2022-03-05 12:57:35 UTC</createdTime>
+<generatorID>237832DA-DDFC-2592-7852-64B6B24E1C53</generatorID>
+<ownerDesignName>modelo</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>10</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="4D2638B8-852C-7188-65DC-B9FBAAD774D2" referredColumn="609FA590-3DBE-68C5-E80D-0AA7015195EF"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="D440EACD-0EE6-912D-6A69-EF3C1E1E6508" name="tb_ocupacao_tb_prestador_FK">
+<createdBy>lucca</createdBy>
+<createdTime>2022-03-05 12:57:35 UTC</createdTime>
+<generatorID>FBCAAF39-50B9-2C0F-F382-F2C356A09921</generatorID>
+<ownerDesignName>modelo</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="35CAA89D-B656-EEED-6764-4C6F1CDB14AC"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="0887D192-5C53-2C8E-CF99-9602D002AE67" name="tb_ocupacao_tb_servico_FK">
+<createdBy>lucca</createdBy>
+<createdTime>2022-03-05 12:57:35 UTC</createdTime>
+<generatorID>DE4BCAFA-769C-CF85-D4D9-62D0AEFD6039</generatorID>
+<ownerDesignName>modelo</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="F2C154AD-9A0B-C678-2283-CEE860F7CB02"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

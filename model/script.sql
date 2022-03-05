@@ -3,6 +3,7 @@
 drop table tb_condominio cascade constraints;
 drop table tb_morada cascade constraints;
 drop table tb_morador cascade constraints;
+drop table tb_ocupacao cascade constraints;
 drop table tb_prestador cascade constraints;
 drop table tb_registro_morada cascade constraints;
 drop table tb_registro_servico cascade constraints;
@@ -15,7 +16,7 @@ drop sequence sq_tb_registro;
 drop sequence sq_tb_servico;
 
 
--- CRIAÇÃO DE SEQUENCES --
+-- CRIAï¿½ï¿½O DE SEQUENCES --
 
 create sequence sq_tb_condominio start with 1 increment by 1;
 create sequence sq_tb_morada start with 1 increment by 1;
@@ -25,7 +26,7 @@ create sequence sq_tb_registro start with 1 increment by 1;
 create sequence sq_tb_servico start with 1 increment by 1;
 
 
--- CRIAÇÃO DE TABELAS --
+-- CRIAï¿½ï¿½O DE TABELAS --
 
 CREATE TABLE tb_condominio (
     id_condominio  NUMBER(10) NOT NULL,
@@ -83,11 +84,24 @@ CREATE TABLE tb_servico (
 
 ALTER TABLE tb_servico ADD CONSTRAINT tb_servico_pk PRIMARY KEY ( id_servico );
 
+CREATE TABLE tb_ocupacao (
+    tb_prestador_id_prestador  NUMBER(10) NOT NULL,
+    tb_servico_id_servico      NUMBER(10) NOT NULL
+);
+
 --  CHAVES ESTRANGEIRAS  --
 
 ALTER TABLE tb_morada
     ADD CONSTRAINT mor_condo_fk FOREIGN KEY ( tb_condominio_id_condominio )
         REFERENCES tb_condominio ( id_condominio );
+
+ALTER TABLE tb_ocupacao
+    ADD CONSTRAINT tb_ocupacao_tb_prestador_fk FOREIGN KEY ( tb_prestador_id_prestador )
+        REFERENCES tb_prestador ( id_prestador );
+
+ALTER TABLE tb_ocupacao
+    ADD CONSTRAINT tb_ocupacao_tb_servico_fk FOREIGN KEY ( tb_servico_id_servico )
+        REFERENCES tb_servico ( id_servico );
 
 ALTER TABLE tb_registro_morada
     ADD CONSTRAINT regis_mor_fk FOREIGN KEY ( tb_morada_id_morada )
@@ -104,7 +118,3 @@ ALTER TABLE tb_registro_servico
 ALTER TABLE tb_registro_servico
     ADD CONSTRAINT regis_serv_pres_fk FOREIGN KEY ( tb_prestador_id_prestador )
         REFERENCES tb_prestador ( id_prestador );
-
-ALTER TABLE tb_registro_servico
-    ADD CONSTRAINT regis_serv_serv_fk FOREIGN KEY ( tb_servico_id_servico )
-        REFERENCES tb_servico ( id_servico );

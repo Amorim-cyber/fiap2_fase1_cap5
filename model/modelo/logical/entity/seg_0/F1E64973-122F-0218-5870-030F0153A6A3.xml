@@ -95,21 +95,6 @@
 <dataTypePrecision>10</dataTypePrecision>
 <ownDataTypeParameters>,10,</ownDataTypeParameters>
 </Attribute>
-<Attribute name="id_servico" id="DDC788BB-A684-900B-47AD-10BC34351434">
-<createdBy>lucca</createdBy>
-<createdTime>2022-02-15 22:19:20 UTC</createdTime>
-<generatorID>61AFF893-BD2D-9F1F-6D17-9B1E454789AB</generatorID>
-<ownerDesignName>modelo</ownerDesignName>
-<engineerTo>
-<item key="8BD968B4-FE0E-FCE3-19F1-2BCFF0C32E1E" value="true"/>
-</engineerTo>
-<referedAttribute>C0769F0D-DBB6-3641-BC5E-7731160D52A6</referedAttribute>
-<useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
-<logicalDatatype>LOGDT019</logicalDatatype>
-<dataTypePrecision>10</dataTypePrecision>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
-</Attribute>
 </attributes>
 <identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
 <identifier id="07E08FA8-22B1-59AF-8436-265D5C1EFFF2" name="tb_registro_servico PK">
