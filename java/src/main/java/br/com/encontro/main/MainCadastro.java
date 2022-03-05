@@ -7,15 +7,15 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-import br.com.encontro.entity.Condominio;
-import br.com.encontro.entity.Estado;
-import br.com.encontro.entity.Estrutura;
-import br.com.encontro.entity.Morada;
-import br.com.encontro.entity.Morador;
-import br.com.encontro.entity.Ocupacao;
-import br.com.encontro.entity.Prestador;
-import br.com.encontro.entity.Registro;
-import br.com.encontro.entity.Servico;
+import br.com.fiap.domain.Condominio;
+import br.com.fiap.domain.Estado;
+import br.com.fiap.domain.Estrutura;
+import br.com.fiap.domain.Morada;
+import br.com.fiap.domain.Morador;
+import br.com.fiap.domain.Ocupacao;
+import br.com.fiap.domain.Prestador;
+import br.com.fiap.domain.Registro;
+import br.com.fiap.domain.Servico;
 
 public class MainCadastro {
 

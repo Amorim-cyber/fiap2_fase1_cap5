@@ -3,7 +3,8 @@ package br.com.encontro.main;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import br.com.encontro.entity.Servico;
+
+import br.com.fiap.domain.Servico;
 
 public class MainRemocao {
 

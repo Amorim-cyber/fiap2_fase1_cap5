@@ -6,12 +6,12 @@
 			org.hibernate.jpa.HibernatePersistenceProvider
 		</provider>
 		
-		<class>br.com.encontro.entity.Condominio</class>
-		<class>br.com.encontro.entity.Morador</class>
-		<class>br.com.encontro.entity.Prestador</class>
-		<class>br.com.encontro.entity.Servico</class>
-		<class>br.com.encontro.entity.Registro</class>
-		<class>br.com.encontro.entity.Morada</class>
+		<class>br.com.fiap.domain.Condominio</class>
+		<class>br.com.fiap.domain.Morador</class>
+		<class>br.com.fiap.domain.Prestador</class>
+		<class>br.com.fiap.domain.Servico</class>
+		<class>br.com.fiap.domain.Registro</class>
+		<class>br.com.fiap.domain.Morada</class>
 		
 		<properties>
 			<property name="hibernate.show_sql" value="true" />

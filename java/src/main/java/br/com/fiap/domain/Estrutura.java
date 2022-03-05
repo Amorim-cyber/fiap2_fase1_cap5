@@ -1,4 +1,4 @@
-package br.com.encontro.entity;
+package br.com.fiap.domain;
 
 public enum Estrutura {
 

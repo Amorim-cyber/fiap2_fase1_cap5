@@ -4,8 +4,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-import br.com.encontro.entity.Condominio;
 import br.com.encontro.util.Mock;
+import br.com.fiap.domain.Condominio;
 
 public class MainAtualizacao {
 
