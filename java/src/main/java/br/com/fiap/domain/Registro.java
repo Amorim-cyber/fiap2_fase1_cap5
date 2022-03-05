@@ -41,10 +41,6 @@ public class Registro {
 	@Column(name="dt_data_fim")
 	private Calendar dataFim;
 	
-	@JoinColumn(name = "id_servico")
-	@ManyToOne(cascade=CascadeType.PERSIST)
-	private Servico tipoServico;
-	
 	@JoinColumn(name = "id_morador")
 	@ManyToOne(cascade=CascadeType.PERSIST)
 	private Morador morador;
@@ -57,10 +53,9 @@ public class Registro {
 	public Registro() {
 	}
 
-	public Registro(int id, Servico tipoServico, Morador morador,
+	public Registro(int id, Morador morador,
 			Prestador prestador,Estado tipo) {
 		this.id = id;
-		this.tipoServico = tipoServico;
 		this.morador = morador;
 		this.prestador = prestador;
 		this.tipo = tipo;
@@ -88,14 +83,6 @@ public class Registro {
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public Servico getTipoServico() {
-		return tipoServico;
-	}
-
-	public void setTipoServico(Servico tipoServico) {
-		this.tipoServico = tipoServico;
 	}
 
 	public Morador getMorador() {
