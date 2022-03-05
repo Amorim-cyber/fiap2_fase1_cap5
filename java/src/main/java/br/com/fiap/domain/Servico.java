@@ -9,7 +9,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -27,17 +27,17 @@ public class Servico {
 	@Column(name="nm_servico")
 	private Ocupacao nome;
 	
-	@OneToMany(mappedBy = "tipoServico")
-	private List<Registro> registros;
+	@ManyToMany(mappedBy="servicos")
+	private List<Prestador> prestadores;
 	
 	public Servico() {
 	}
 
-	public Servico(int id, Ocupacao nome, List<Registro> registros) {
+	public Servico(int id, Ocupacao nome, List<Prestador> prestadores) {
 		super();
 		this.id = id;
 		this.nome = nome;
-		this.registros = registros;
+		this.prestadores = prestadores;
 	}
 
 	public int getId() {
@@ -56,12 +56,12 @@ public class Servico {
 		this.nome = nome;
 	}
 
-	public List<Registro> getRegistros() {
-		return registros;
+	public List<Prestador> getPrestadores() {
+		return prestadores;
 	}
 
-	public void setRegistros(List<Registro> registros) {
-		this.registros = registros;
+	public void setPrestadores(List<Prestador> prestadores) {
+		this.prestadores = prestadores;
 	}
 	
 	
