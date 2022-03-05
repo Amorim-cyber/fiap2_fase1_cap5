@@ -2,11 +2,15 @@ package br.com.fiap.domain;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -30,14 +34,19 @@ public class Prestador {
 	@OneToMany(mappedBy = "prestador")
 	private List<Registro> registros;
 	
+	@ManyToMany(cascade=CascadeType.PERSIST)
+	@JoinTable(joinColumns = @JoinColumn(name="id_prestador"), 
+	inverseJoinColumns = @JoinColumn(name="id_servico"), name = "tb_ocupacao")
+	private List<Servico> servicos;
+	
 	public Prestador() {
 	}
 	
-	public Prestador(int id, String nome, int telefone, List<Registro> registros) {
+	public Prestador(int id, String nome, int telefone, List<Servico> servicos) {
 		this.id = id;
 		this.nome = nome;
 		this.telefone = telefone;
-		this.registros = registros;
+		this.servicos = servicos;
 	}
 
 
