@@ -13,8 +13,8 @@ No <a href="https://github.com/Amorim-cyber/fiap2_fase1_cap4">projeto do capítu
 * <b style="color:grey">Relação morada_morador:</b> Uma morada deve ser habitada por um ou mais moradores e um morador deve morar em pelo menos uma morada.
 * <b>tb_servico:</b> Tabela que vai armazenar dados do serviço. Contém o nome do serviço.
 * <b>tb_prestador:</b> Tabela que vai armazenar dados do prestador de serviço. Contém o nome, número de telefone do prestador.
+* <b style="color:grey">Relação prestador_servico:</b> Um prestador deve oferecer pelo menos um serviço e um serviço deve estar contido em pelo menos um prestador.
 * <b>tb_registro_servico:</b> Tabela que vai armazenar dados do registro de serviço. Contém a data de inicio, a data de fim de serviço e o status do registro.
-* <b style="color:grey">Relação servico_registro:</b> Um tipo de serviço deve ser registrado e um registro deve conter  um tipo de serviço.
 * <b style="color:grey">Relação prestador_registro:</b> Um prestador de serviço deve ser registrado e um registro deve conter um prestador de serviço.
 * <b style="color:grey">Relação morador_registro:</b> Um morador deve ser registrado e um registro deve conter um morador.
 
@@ -34,6 +34,7 @@ O script que efetua o `create` das tabelas, sequências e chaves estrangeiras fo
 drop table tb_condominio cascade constraints;
 drop table tb_morada cascade constraints;
 drop table tb_morador cascade constraints;
+drop table tb_ocupacao cascade constraints;
 drop table tb_prestador cascade constraints;
 drop table tb_registro_morada cascade constraints;
 drop table tb_registro_servico cascade constraints;
@@ -46,7 +47,7 @@ drop sequence sq_tb_registro;
 drop sequence sq_tb_servico;
 
 
--- CRIAÇÃO DE SEQUENCES --
+-- CRIA��O DE SEQUENCES --
 
 create sequence sq_tb_condominio start with 1 increment by 1;
 create sequence sq_tb_morada start with 1 increment by 1;
@@ -56,7 +57,7 @@ create sequence sq_tb_registro start with 1 increment by 1;
 create sequence sq_tb_servico start with 1 increment by 1;
 
 
--- CRIAÇÃO DE TABELAS --
+-- CRIA��O DE TABELAS --
 
 CREATE TABLE tb_condominio (
     id_condominio  NUMBER(10) NOT NULL,
@@ -114,11 +115,24 @@ CREATE TABLE tb_servico (
 
 ALTER TABLE tb_servico ADD CONSTRAINT tb_servico_pk PRIMARY KEY ( id_servico );
 
+CREATE TABLE tb_ocupacao (
+    tb_prestador_id_prestador  NUMBER(10) NOT NULL,
+    tb_servico_id_servico      NUMBER(10) NOT NULL
+);
+
 --  CHAVES ESTRANGEIRAS  --
 
 ALTER TABLE tb_morada
     ADD CONSTRAINT mor_condo_fk FOREIGN KEY ( tb_condominio_id_condominio )
         REFERENCES tb_condominio ( id_condominio );
+
+ALTER TABLE tb_ocupacao
+    ADD CONSTRAINT tb_ocupacao_tb_prestador_fk FOREIGN KEY ( tb_prestador_id_prestador )
+        REFERENCES tb_prestador ( id_prestador );
+
+ALTER TABLE tb_ocupacao
+    ADD CONSTRAINT tb_ocupacao_tb_servico_fk FOREIGN KEY ( tb_servico_id_servico )
+        REFERENCES tb_servico ( id_servico );
 
 ALTER TABLE tb_registro_morada
     ADD CONSTRAINT regis_mor_fk FOREIGN KEY ( tb_morada_id_morada )
@@ -136,9 +150,6 @@ ALTER TABLE tb_registro_servico
     ADD CONSTRAINT regis_serv_pres_fk FOREIGN KEY ( tb_prestador_id_prestador )
         REFERENCES tb_prestador ( id_prestador );
 
-ALTER TABLE tb_registro_servico
-    ADD CONSTRAINT regis_serv_serv_fk FOREIGN KEY ( tb_servico_id_servico )
-        REFERENCES tb_servico ( id_servico );
 
 `````
 
@@ -165,7 +176,7 @@ ALTER TABLE tb_registro_servico
 2. <b>Condominio.java</b>
 
    `````java
-   package br.com.encontro.entity;
+   package br.com.fiap.domain;
    
    import java.util.List;
    
@@ -273,7 +284,7 @@ ALTER TABLE tb_registro_servico
    Segue abaixo o código da classe
 
    ````java
-   package br.com.encontro.entity;
+   package br.com.fiap.domain;
    
    import java.util.List;
    
@@ -382,7 +393,7 @@ ALTER TABLE tb_registro_servico
 4. <b>Morador.java</b>
 
    ````java
-   package br.com.encontro.entity;
+   package br.com.fiap.domain;
    
    import java.util.List;
    
@@ -494,7 +505,7 @@ ALTER TABLE tb_registro_servico
    Segue abaixo o código da classe
 
    ````java
-   package br.com.encontro.entity;
+   package br.com.fiap.domain;
    
    import java.util.List;
    
@@ -505,7 +516,7 @@ ALTER TABLE tb_registro_servico
    import javax.persistence.GeneratedValue;
    import javax.persistence.GenerationType;
    import javax.persistence.Id;
-   import javax.persistence.OneToMany;
+   import javax.persistence.ManyToMany;
    import javax.persistence.SequenceGenerator;
    import javax.persistence.Table;
    
@@ -523,17 +534,17 @@ ALTER TABLE tb_registro_servico
    	@Column(name="nm_servico")
    	private Ocupacao nome;
    	
-   	@OneToMany(mappedBy = "tipoServico")
-   	private List<Registro> registros;
+   	@ManyToMany(mappedBy="servicos")
+   	private List<Prestador> prestadores;
    	
    	public Servico() {
    	}
    
-   	public Servico(int id, Ocupacao nome, List<Registro> registros) {
+   	public Servico(int id, Ocupacao nome, List<Prestador> prestadores) {
    		super();
    		this.id = id;
    		this.nome = nome;
-   		this.registros = registros;
+   		this.prestadores = prestadores;
    	}
    
    	public int getId() {
@@ -552,12 +563,12 @@ ALTER TABLE tb_registro_servico
    		this.nome = nome;
    	}
    
-   	public List<Registro> getRegistros() {
-   		return registros;
+   	public List<Prestador> getPrestadores() {
+   		return prestadores;
    	}
    
-   	public void setRegistros(List<Registro> registros) {
-   		this.registros = registros;
+   	public void setPrestadores(List<Prestador> prestadores) {
+   		this.prestadores = prestadores;
    	}
    	
    	
@@ -580,7 +591,7 @@ Vamos explicar as relações em nosso programa.
 
 * <b>Relação Muitos para Muitos:</b> 
 
-  As entidades `Morador` e `Morada` possuem relação N x N. Adicionamos as seguintes linhas de código nos seguintes arquivos:
+  As entidades `Morador` , `Morada` , `Prestador` e `Servico` possuem relação N x N. Adicionamos as seguintes linhas de código nos seguintes arquivos:
 
   <b>Morador.java:</b>
 
@@ -598,18 +609,30 @@ Vamos explicar as relações em nosso programa.
   	private List<Morador> moradores;
   ````
 
+  <b>Prestador.java:</b>
+
+  ````java
+  @ManyToMany(cascade=CascadeType.PERSIST)
+  	@JoinTable(joinColumns = @JoinColumn(name="id_prestador"), 
+  	inverseJoinColumns = @JoinColumn(name="id_servico"), name = "tb_ocupacao")
+  	private List<Servico> servicos;
+  ````
+
+  <b>Servico.java:</b>
+
+  ````java
+  @ManyToMany(mappedBy="servicos")
+  	private List<Prestador> prestadores;
+  ````
+
 * <b>Relação Muitos para Um:</b>
 
-  A entidade `Registro Serviço` possui uma relação de muitos para um com as entidades `Serviço`, `Morador` e `Prestador`, da mesma forma que `Morada` tem sobre `Condominio`. Adicionamos as seguintes linhas de código nos seguintes arquivos:
+  A entidade `Registro Serviço` possui uma relação de muitos para um com as entidades `Morador` e `Prestador`, da mesma forma que `Morada` tem sobre `Condominio`. Adicionamos as seguintes linhas de código nos seguintes arquivos:
 
   <b>Registro.java</b>:
 
   ````java
-  @JoinColumn(name = "id_servico")
-  	@ManyToOne(cascade=CascadeType.PERSIST)
-  	private Servico tipoServico;
-  	
-  	@JoinColumn(name = "id_morador")
+  @JoinColumn(name = "id_morador")
   	@ManyToOne(cascade=CascadeType.PERSIST)
   	private Morador morador;
   	
@@ -617,20 +640,20 @@ Vamos explicar as relações em nosso programa.
   	@ManyToOne(cascade=CascadeType.PERSIST)
   	private Prestador prestador;
   ````
-
+  
    <b>Morada.java:</b>
-
+  
   ````java
   @JoinColumn(name = "id_condominio")
   	@ManyToOne(cascade=CascadeType.PERSIST)
   	private Condominio condominio;
   ````
-
   
-
+  
+  
 * <b>Relação Um para Muitos:</b>
 
-  As entidades  `Serviço`, `Morador` e `Prestador` possuem uma relação de um para muitos em relação a `Registro Serviço`, da mesma forma que `Condominio` tem sobre `Morada`. Adicionamos as seguintes linhas de código nos seguintes arquivos:
+  As entidades `Morador` e `Prestador` possuem uma relação de um para muitos em relação a `Registro Serviço`, da mesma forma que `Condominio` tem sobre `Morada`. Adicionamos as seguintes linhas de código nos seguintes arquivos:
 
   <b>Morador.java</b>
 
@@ -646,15 +669,8 @@ Vamos explicar as relações em nosso programa.
   	private List<Registro> registros;
   ````
 
-  <b>Servico.java</b>
-
-  ````java
-  @OneToMany(mappedBy = "tipoServico")
-  	private List<Registro> registros;
-  ````
-  
   <b>Condominio.java</b>
-  
+
   ````java
   @OneToMany(mappedBy = "condominio")
   	private List<Morada> moradas;
@@ -672,159 +688,27 @@ Seguindo com o projeto, vamos criar as operações de incluir, buscar, atualizar
 
 <h4>Incluir:</h4>
 
-Iremos adicionar o arquivo `MainCadastro.java` para testar as inclusões. Código disponibilizado logo abaixo 
+Iremos adicionar o arquivo `MainCadastro.java` para testar as inclusões. 
+
+Por motivos educacionais, estamos sempre deletando e recriando o banco em cada execução. Afim de deixar nosso código mais limpo, criei a classe `Mock.java` para incluir os dados.
 
 ````java
-package br.com.encontro.main;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-
-import br.com.encontro.entity.Condominio;
-import br.com.encontro.entity.Estado;
-import br.com.encontro.entity.Estrutura;
-import br.com.encontro.entity.Morada;
-import br.com.encontro.entity.Morador;
-import br.com.encontro.entity.Ocupacao;
-import br.com.encontro.entity.Prestador;
-import br.com.encontro.entity.Registro;
-import br.com.encontro.entity.Servico;
-
-public class MainCadastro {
-
-	public static void main(String[] args) {
-		EntityManagerFactory fabrica = Persistence.createEntityManagerFactory("encontro");
-		EntityManager em = fabrica.createEntityManager();
-		
-		// Incluindo condominios 
-		
-		Condominio condominio1 = new Condominio(0,
-		"Condomínio do Edifício Yellow Bali",
-		"Av. Alfredo Balthazar da Silveira, 289 - bloco 2 - Recreio dos Bandeirantes, Rio de Janeiro - RJ, 22790-710",
-		null);
-		Condominio condominio2 = new Condominio(0,
-		"Condomínio London Green",
-		"R. César Lattes, 1000 - Barra da Tijuca, Rio de Janeiro - RJ, 22793-329",
-		null);
-		
-		Condominio condominio3 = new Condominio(0,
-		"Vila Pan-Americana",
-		"Av. Cláudio Besserman Vianna - Jacarepaguá, Rio de Janeiro - RJ, 22775-036",
-		null);
-		
-		// Incluindo moradas
-		
-		Morada morada1 = new Morada(0,55,Estrutura.CASA,null,condominio2);
-		
-		Morada morada2 = new Morada(0,104,Estrutura.APARTAMENTO,null,condominio3);
-		
-		Morada morada3 = new Morada(0,204,Estrutura.APARTAMENTO,null,condominio1);
-		
-		Morada morada4 = new Morada(0,105,Estrutura.APARTAMENTO,null,condominio3);
-		
-		Morada morada5 = new Morada(0,70,Estrutura.CASA,null,condominio2);
-		
-		List<Morada> moradas1 = new ArrayList<Morada>();
-		moradas1.add(morada1);
-		
-		List<Morada> moradas2 = new ArrayList<Morada>();
-		moradas2.add(morada2);
-		
-		List<Morada> moradas3 = new ArrayList<Morada>();
-		moradas3.add(morada3);
-		
-		List<Morada> moradas4 = new ArrayList<Morada>();
-		moradas4.add(morada4);
-		moradas4.add(morada5);
-		
-		// Incluindo moradores
-		
-		Morador morador1 = new Morador(0,"Mario",moradas1,null);
-		Morador morador2 = new Morador(0,"Joana",moradas2,null);
-		Morador morador3 = new Morador(0,"Isadora",moradas3,null);
-		Morador morador4 = new Morador(0,"David",moradas4,null);
-		
-
-		// Incluindo servicos
-		
-		Servico servico1 = new Servico(0,Ocupacao.ELETRICISTA,null);
-		Servico servico2 = new Servico(0,Ocupacao.ENCANADOR,null);
-		Servico servico3 = new Servico(0,Ocupacao.PINTOR,null);
-		Servico servico4 = new Servico(0,Ocupacao.PEDREIRO,null);
-		
-		// Incluindo prestadores
-		
-		Prestador prestador1 = new Prestador(0,"José",24477155,null);
-		Prestador prestador2 = new Prestador(0,"Cleiton",24277155,null);
-		
-		//Incluindo registros
-		
-		Registro registro1 = new Registro(0,servico1,morador1,prestador1,Estado.ABERTO);
-		Registro registro2 = new Registro(0,servico2,morador2,prestador1,Estado.ABERTO);
-		Registro registro3 = new Registro(0,servico3,morador3,prestador2,Estado.ABERTO);
-		Registro registro4 = new Registro(0,servico4,morador4,prestador2,Estado.ABERTO);
-		
-		// Salvando registros
-		
-		try {
-			em.persist(registro1);
-			em.persist(registro2);
-			em.persist(registro3);
-			em.persist(registro4);
-			
-			
-			em.getTransaction().begin();
-			em.getTransaction().commit();
-		}catch(Exception e) {
-			if(em.getTransaction().isActive()) {
-				em.getTransaction().rollback();
-			}
-		}
-		
-		
-		
-		em.close();
-		fabrica.close();
-		
-	}
-
-}
-
-````
-
-Reparem que as inclusões estão em cascata `(cascade=CascadeType.PERSIST)` neste exemplo. O método `persist` está apenas recebendo os objetos da classe `Registro.java`. Ao persistir sobre `Registro`, também persiste sobre `Morador`, `Servico` e `Prestador`, que por sua vez persiste em `Morada` e `Condominio`.
-
-Ao processar o código acima no programa e consultar o SGBD Oracle, podemos perceber que as inclusões foram um sucesso!
-
-<img src="assets/Incluir.GIF">
-
-<h4>Buscar:</h4>
-
-Para demonstrar as operações de busca vamos criar a classe `MainBuscar.java`.
-
-Por motivos educacionais, estamos sempre deletando e recriando o banco em cada execução. Afim de evitar inclusão dos dados no código `MainBuscar.java`, criei a classe `Mock.java` para armazena-los.
-
-````java
-package br.com.encontro.util;
+package br.com.fiap.util;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 
-import br.com.encontro.entity.Condominio;
-import br.com.encontro.entity.Estado;
-import br.com.encontro.entity.Estrutura;
-import br.com.encontro.entity.Morada;
-import br.com.encontro.entity.Morador;
-import br.com.encontro.entity.Ocupacao;
-import br.com.encontro.entity.Prestador;
-import br.com.encontro.entity.Registro;
-import br.com.encontro.entity.Servico;
+import br.com.fiap.domain.Condominio;
+import br.com.fiap.domain.Estado;
+import br.com.fiap.domain.Estrutura;
+import br.com.fiap.domain.Morada;
+import br.com.fiap.domain.Morador;
+import br.com.fiap.domain.Ocupacao;
+import br.com.fiap.domain.Prestador;
+import br.com.fiap.domain.Registro;
+import br.com.fiap.domain.Servico;
 
 public class Mock {
 	
@@ -886,17 +770,25 @@ public class Mock {
 				Servico servico3 = new Servico(0,Ocupacao.PINTOR,null);
 				Servico servico4 = new Servico(0,Ocupacao.PEDREIRO,null);
 				
+				List<Servico> servicos1 = new ArrayList<Servico>();
+				servicos1.add(servico1);
+				servicos1.add(servico2);
+				
+				List<Servico> servicos2 = new ArrayList<Servico>();
+				servicos2.add(servico3);
+				servicos2.add(servico4);
+				
 				// Incluindo prestadores
 				
-				Prestador prestador1 = new Prestador(0,"José",24477155,null);
-				Prestador prestador2 = new Prestador(0,"Cleiton",24277155,null);
+				Prestador prestador1 = new Prestador(0,"José",24477155,servicos1);
+				Prestador prestador2 = new Prestador(0,"Cleiton",24277155,servicos2);
 				
 				//Incluindo registros
 				
-				Registro registro1 = new Registro(0,servico1,morador1,prestador1,Estado.ABERTO);
-				Registro registro2 = new Registro(0,servico2,morador2,prestador1,Estado.ABERTO);
-				Registro registro3 = new Registro(0,servico3,morador3,prestador2,Estado.ABERTO);
-				Registro registro4 = new Registro(0,servico4,morador4,prestador2,Estado.ABERTO);
+				Registro registro1 = new Registro(0,morador1,prestador1,Estado.ABERTO);
+				Registro registro2 = new Registro(0,morador2,prestador1,Estado.ABERTO);
+				Registro registro3 = new Registro(0,morador3,prestador2,Estado.ABERTO);
+				Registro registro4 = new Registro(0,morador4,prestador2,Estado.ABERTO);
 				
 				// Salvando registros
 				
@@ -921,7 +813,43 @@ public class Mock {
 
 ````
 
-Ao executar o arquivo, só precisamos instanciar a classe `Mock.java` para incluir os dados que serão consultados. Segue abaixo o código de buscar:
+Ao executar o arquivo, só precisamos instanciar a classe `Mock.java` para incluir os dados que serão utilizados. 
+
+````java
+package br.com.fiap.main;
+
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import br.com.fiap.util.Mock;
+
+public class MainCadastro {
+
+	public static void main(String[] args) {
+		EntityManagerFactory fabrica = Persistence.createEntityManagerFactory("encontro");
+		EntityManager em = fabrica.createEntityManager();
+		
+		new Mock(em);
+		
+		em.close();
+		fabrica.close();
+		
+	}
+
+}
+
+````
+
+Reparem que as inclusões estão em cascata `(cascade=CascadeType.PERSIST)` neste exemplo. O método `persist` está apenas recebendo os objetos da classe `Registro.java`. Ao persistir sobre `Registro`, também persiste sobre `Morador` e `Prestador`, que por sua vez persiste em `Morada` , `Condominio` e `Servico` .
+
+Ao processar o código acima no programa e consultar o SGBD Oracle, podemos perceber que as inclusões foram um sucesso!
+
+<img src="assets/Incluir.GIF">
+
+<h4>Buscar:</h4>
+
+Para demonstrar as operações de busca vamos criar a classe `MainBuscar.java`. 
 
 ````java
 package br.com.encontro.main;
@@ -967,7 +895,15 @@ Neste caso, o código está buscando os dados da entidade `Morador` e imprimindo
 
 <h4>Atualizar:</h4>
 
-Seguimos com a criação da classe `MainAtualizacao.java` que vai demonstrar a operação de atualização. Neste exemplo abaixo realizamos a troca dos dados de um condomínio.
+Seguimos com a criação da classe `MainAtualizacao.java` que vai demonstrar a operação de atualização. Neste exemplo abaixo realizamos a troca dos dados de um condomínio. 
+
+<b>ATENÇÃO:</b> Quando for testar essa operação altere a propriedade localizada no arquivo `persistence.xml` com o seguinte código abaixo:
+
+````xml
+<property name="hibernate.hbm2ddl.auto" value="update" />
+````
+
+
 
 ````java
 package br.com.encontro.main;
@@ -1063,7 +999,11 @@ public class TesteAtualizacao {
 
 ````
 
- Executando o código, podemos perceber que a operação foi um sucesso.
+<b>IMPORTANTE:</b>
+
+O código acima só irá funcionar se as tabelas já estiverem sido criadas. 
+
+Executando o código, podemos perceber que a operação foi um sucesso.
 
 <img src="assets/atualizar.PNG">
 
@@ -1076,6 +1016,14 @@ Com o intuito de mostrar a operação de remoção, alterei as configurações d
 ````
 
 Foi criado a classe `MainRemocao.java` para simular a operação de remoção de um dado presente na tabela de `Serviços`.
+
+<b>ATENÇÃO:</b> Quando for testar essa operação altere a propriedade localizada no arquivo `persistence.xml` com o seguinte código abaixo:
+
+````xml
+<property name="hibernate.hbm2ddl.auto" value="update" />
+````
+
+
 
 ````java
 package br.com.encontro.main;
