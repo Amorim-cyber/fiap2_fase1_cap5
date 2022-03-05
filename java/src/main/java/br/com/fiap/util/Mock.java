@@ -75,17 +75,25 @@ public class Mock {
 				Servico servico3 = new Servico(0,Ocupacao.PINTOR,null);
 				Servico servico4 = new Servico(0,Ocupacao.PEDREIRO,null);
 				
+				List<Servico> servicos1 = new ArrayList<Servico>();
+				servicos1.add(servico1);
+				servicos1.add(servico2);
+				
+				List<Servico> servicos2 = new ArrayList<Servico>();
+				servicos2.add(servico3);
+				servicos2.add(servico4);
+				
 				// Incluindo prestadores
 				
-				Prestador prestador1 = new Prestador(0,"José",24477155,null);
-				Prestador prestador2 = new Prestador(0,"Cleiton",24277155,null);
+				Prestador prestador1 = new Prestador(0,"José",24477155,servicos1);
+				Prestador prestador2 = new Prestador(0,"Cleiton",24277155,servicos2);
 				
 				//Incluindo registros
 				
-				Registro registro1 = new Registro(0,servico1,morador1,prestador1,Estado.ABERTO);
-				Registro registro2 = new Registro(0,servico2,morador2,prestador1,Estado.ABERTO);
-				Registro registro3 = new Registro(0,servico3,morador3,prestador2,Estado.ABERTO);
-				Registro registro4 = new Registro(0,servico4,morador4,prestador2,Estado.ABERTO);
+				Registro registro1 = new Registro(0,morador1,prestador1,Estado.ABERTO);
+				Registro registro2 = new Registro(0,morador2,prestador1,Estado.ABERTO);
+				Registro registro3 = new Registro(0,morador3,prestador2,Estado.ABERTO);
+				Registro registro4 = new Registro(0,morador4,prestador2,Estado.ABERTO);
 				
 				// Salvando registros
 				
